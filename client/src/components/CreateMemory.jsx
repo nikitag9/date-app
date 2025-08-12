@@ -27,7 +27,8 @@ import {
   CalendarToday,
   ArrowBack,
   Save,
-  Person
+  Person,
+  Image
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -326,247 +327,93 @@ const CreateMemory = () => {
 
           <Box component="form" onSubmit={handleSubmit}>
             <Grid container spacing={3}>
-              {/* Title */}
               <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Memory Title"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleInputChange}
-                  variant="outlined"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Add sx={{ color: '#667eea' }} />
-                      </InputAdornment>
-                    ),
-                  }}
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: 2,
-                      '& fieldset': {
-                        borderColor: 'rgba(102, 126, 234, 0.2)',
-                      },
-                      '&:hover fieldset': {
-                        borderColor: 'rgba(102, 126, 234, 0.4)',
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#667eea',
-                      },
-                    },
-                  }}
+                <TextField 
+                  fullWidth 
+                  label="Memory Title *" 
+                  name="title" 
+                  value={formData.title} 
+                  onChange={handleInputChange} 
+                  variant="outlined" 
+                  required
+                  InputProps={{ startAdornment: (<InputAdornment position="start"><Add sx={{ color: '#667eea' }} /></InputAdornment>) }} 
+                  sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2, '& fieldset': { borderColor: 'rgba(102, 126, 234, 0.2)' }, '&:hover fieldset': { borderColor: 'rgba(102, 126, 234, 0.4)' }, '&.Mui-focused fieldset': { borderColor: '#667eea' } } }} 
                 />
               </Grid>
-
-              {/* Date and Location */}
-              <Grid item xs={12} md={6}>
-                <TextField
-                  fullWidth
-                  label="Date"
-                  name="date"
-                  type="date"
-                  value={formData.date}
-                  onChange={handleInputChange}
-                  variant="outlined"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <CalendarToday sx={{ color: '#667eea' }} />
-                      </InputAdornment>
-                    ),
-                  }}
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: 2,
-                      '& fieldset': {
-                        borderColor: 'rgba(102, 126, 234, 0.2)',
-                      },
-                      '&:hover fieldset': {
-                        borderColor: 'rgba(102, 126, 234, 0.4)',
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#667eea',
-                      },
-                    },
-                  }}
+              <Grid item xs={12} sm={6}>
+                <TextField 
+                  fullWidth 
+                  label="Date *" 
+                  name="date" 
+                  type="date" 
+                  value={formData.date} 
+                  onChange={handleInputChange} 
+                  variant="outlined" 
+                  required
+                  InputLabelProps={{ shrink: true }} 
+                  InputProps={{ startAdornment: (<InputAdornment position="start"><CalendarToday sx={{ color: '#667eea' }} /></InputAdornment>) }} 
+                  sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2, '& fieldset': { borderColor: 'rgba(102, 126, 234, 0.2)' }, '&:hover fieldset': { borderColor: 'rgba(102, 126, 234, 0.4)' }, '&.Mui-focused fieldset': { borderColor: '#667eea' } } }} 
                 />
               </Grid>
-
-              <Grid item xs={12} md={6}>
-                <TextField
-                  fullWidth
-                  label="Location"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleInputChange}
-                  variant="outlined"
-                  placeholder="Where did this happen?"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <LocationOn sx={{ color: '#667eea' }} />
-                      </InputAdornment>
-                    ),
-                  }}
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: 2,
-                      '& fieldset': {
-                        borderColor: 'rgba(102, 126, 234, 0.2)',
-                      },
-                      '&:hover fieldset': {
-                        borderColor: 'rgba(102, 126, 234, 0.4)',
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#667eea',
-                      },
-                    },
-                  }}
+              <Grid item xs={12} sm={6}>
+                <TextField 
+                  fullWidth 
+                  label="Location (Optional)" 
+                  name="location" 
+                  value={formData.location} 
+                  onChange={handleInputChange} 
+                  variant="outlined" 
+                  InputProps={{ startAdornment: (<InputAdornment position="start"><LocationOn sx={{ color: '#667eea' }} /></InputAdornment>) }} 
+                  sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2, '& fieldset': { borderColor: 'rgba(102, 126, 234, 0.2)' }, '&:hover fieldset': { borderColor: 'rgba(102, 126, 234, 0.4)' }, '&.Mui-focused fieldset': { borderColor: '#667eea' } } }} 
                 />
               </Grid>
-
-              {/* Notes */}
               <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Notes"
-                  name="notes"
-                  value={formData.notes}
-                  onChange={handleInputChange}
-                  multiline
-                  rows={4}
-                  variant="outlined"
-                  placeholder="Write about your special moment..."
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: 2,
-                      '& fieldset': {
-                        borderColor: 'rgba(102, 126, 234, 0.2)',
-                      },
-                      '&:hover fieldset': {
-                        borderColor: 'rgba(102, 126, 234, 0.4)',
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#667eea',
-                      },
-                    },
-                  }}
+                <TextField 
+                  fullWidth 
+                  label="Notes (Optional)" 
+                  name="notes" 
+                  multiline 
+                  rows={4} 
+                  value={formData.notes} 
+                  onChange={handleInputChange} 
+                  variant="outlined" 
+                  sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2, '& fieldset': { borderColor: 'rgba(102, 126, 234, 0.2)' }, '&:hover fieldset': { borderColor: 'rgba(102, 126, 234, 0.4)' }, '&.Mui-focused fieldset': { borderColor: '#667eea' } } }} 
                 />
               </Grid>
-
-              {/* Image Upload */}
               <Grid item xs={12}>
-                <Box sx={{ mb: 2 }}>
-                  <Typography variant="h6" gutterBottom sx={{ fontWeight: 600, color: '#2d3748' }}>
-                    Add Photos
-                  </Typography>
-                  <input
-                    accept="image/*"
-                    style={{ display: 'none' }}
-                    id="image-upload"
-                    multiple
-                    type="file"
-                    onChange={handleImageUpload}
-                  />
-                  <label htmlFor="image-upload">
-                    <Button
-                      variant="outlined"
-                      component="span"
-                      startIcon={<CloudUpload />}
-                      sx={{ 
-                        mb: 2,
-                        borderRadius: 2,
-                        borderColor: 'rgba(102, 126, 234, 0.3)',
-                        color: '#667eea',
-                        '&:hover': {
-                          borderColor: '#667eea',
-                          background: 'rgba(102, 126, 234, 0.1)'
-                        }
-                      }}
-                    >
-                      Choose Images
-                    </Button>
-                  </label>
-                </Box>
-
-                {/* Image Preview */}
-                <Grid container spacing={2}>
-                  {formData.images.map((image, index) => (
-                    <Grid item xs={12} sm={6} md={4} key={index}>
-                      <Card sx={{ 
-                        position: 'relative',
-                        borderRadius: 2,
-                        overflow: 'hidden'
-                      }}>
-                        <CardMedia
-                          component="img"
-                          height="150"
-                          image={image.preview}
-                          alt={image.name}
-                          sx={{ objectFit: 'cover' }}
-                        />
-                        <IconButton
-                          sx={{
-                            position: 'absolute',
-                            top: 8,
-                            right: 8,
-                            backgroundColor: 'rgba(255,255,255,0.9)',
-                            '&:hover': {
-                              backgroundColor: 'rgba(255,255,255,1)'
-                            }
-                          }}
-                          onClick={() => removeImage(index)}
-                        >
+                <Button 
+                  variant="outlined" 
+                  component="label" 
+                  fullWidth 
+                  sx={{ py: 1.5, borderRadius: 2, borderColor: 'rgba(102, 126, 234, 0.3)', color: '#667eea', '&:hover': { borderColor: '#667eea', background: 'rgba(102, 126, 234, 0.1)' } }}
+                >
+                  <Image sx={{ mr: 1 }} /> Upload Image *
+                  <input type="file" hidden onChange={handleImageUpload} accept="image/*" required />
+                </Button>
+                {formData.images.length > 0 && (
+                  <Box sx={{ mt: 2, display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+                    {formData.images.map((image, index) => (
+                      <Card key={index} sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden' }}>
+                        <CardMedia component="img" height="150" image={image.preview} alt={image.name} sx={{ objectFit: 'cover' }} />
+                        <IconButton onClick={() => removeImage(index)} sx={{ position: 'absolute', top: 4, right: 4, background: 'rgba(0,0,0,0.5)', color: '#fff', '&:hover': { background: 'rgba(0,0,0,0.7)' } }}>
                           <Delete color="error" />
                         </IconButton>
-                        <Box sx={{ p: 1 }}>
-                          <Typography variant="caption" noWrap sx={{ color: '#2d3748' }}>
-                            {image.name}
-                          </Typography>
-                        </Box>
                       </Card>
-                    </Grid>
-                  ))}
-                </Grid>
+                    ))}
+                  </Box>
+                )}
               </Grid>
-
-              {/* Submit Button */}
               <Grid item xs={12}>
-                <Box sx={{ display: 'flex', gap: 2, justifyContent: 'flex-end' }}>
-                  <Button
-                    variant="outlined"
-                    onClick={() => navigate('/')}
-                    disabled={uploading}
-                    sx={{
-                      borderRadius: 2,
-                      borderColor: 'rgba(102, 126, 234, 0.3)',
-                      color: '#667eea',
-                      '&:hover': {
-                        borderColor: '#667eea',
-                        background: 'rgba(102, 126, 234, 0.1)'
-                      }
-                    }}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    startIcon={uploading ? <CircularProgress size={20} /> : <Save />}
-                    disabled={uploading || !formData.title}
-                    sx={{
-                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                      borderRadius: 2,
-                      textTransform: 'none',
-                      '&:hover': {
-                        background: 'linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%)'
-                      }
-                    }}
-                  >
-                    {uploading ? 'Creating...' : 'Save Memory'}
-                  </Button>
-                </Box>
+                <Button 
+                  type="submit" 
+                  fullWidth 
+                  variant="contained" 
+                  size="large" 
+                  disabled={uploading || !formData.title || !formData.date || formData.images.length === 0} 
+                  sx={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', borderRadius: 2, textTransform: 'none' }}
+                >
+                  {uploading ? <CircularProgress size={24} /> : 'Save Memory'}
+                </Button>
               </Grid>
             </Grid>
           </Box>

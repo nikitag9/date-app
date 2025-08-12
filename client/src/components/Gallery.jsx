@@ -172,91 +172,40 @@ const Gallery = () => {
   }
 
   return (
-    <Box sx={{ 
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%)',
-      py: 3
-    }}>
+    <Box sx={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%)', py: { xs: 2, md: 3 } }}>
       <Container maxWidth="lg">
-        <Paper 
-          elevation={0}
-          sx={{ 
-            p: 4,
-            borderRadius: 4,
-            background: 'rgba(255,255,255,0.8)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255,255,255,0.2)'
-          }}
-        >
-          {/* Header */}
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
-            <IconButton 
-              onClick={() => navigate('/')} 
-              sx={{ 
-                mr: 2,
-                background: 'rgba(102, 126, 234, 0.1)',
-                '&:hover': {
-                  background: 'rgba(102, 126, 234, 0.2)'
-                }
-              }}
-            >
-              <ArrowBack />
-            </IconButton>
-            <Typography variant="h4" component="h1" sx={{ fontWeight: 700, color: '#2d3748' }}>
-              Memory Gallery
-            </Typography>
+        <Paper elevation={0} sx={{ p: { xs: 2, md: 4 }, borderRadius: 4, background: 'rgba(255,255,255,0.8)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 2, md: 4 } }}>
+            <IconButton onClick={() => navigate('/')} sx={{ mr: 2, background: 'rgba(102, 126, 234, 0.1)', '&:hover': { background: 'rgba(102, 126, 234, 0.2)' } }}><ArrowBack /></IconButton>
+            <Typography variant="h4" component="h1" sx={{ fontWeight: 700, color: '#2d3748', fontSize: { xs: '1.5rem', md: '2.125rem' } }}>Memory Gallery</Typography>
           </Box>
-
-          {/* Search and Filter */}
-          <Box sx={{ mb: 4 }}>
+          <Box sx={{ mb: { xs: 2, md: 4 } }}>
             <Grid container spacing={2} alignItems="center">
               <Grid item xs={12} md={6}>
-                <TextField
-                  fullWidth
-                  placeholder="Search memories..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  variant="outlined"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Search sx={{ color: '#667eea' }} />
-                      </InputAdornment>
-                    ),
-                  }}
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: 2,
-                      '& fieldset': {
-                        borderColor: 'rgba(102, 126, 234, 0.2)',
-                      },
-                      '&:hover fieldset': {
-                        borderColor: 'rgba(102, 126, 234, 0.4)',
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#667eea',
-                      },
-                    },
-                  }}
+                <TextField 
+                  fullWidth 
+                  label="Search memories..." 
+                  value={searchTerm} 
+                  onChange={(e) => setSearchTerm(e.target.value)} 
+                  variant="outlined" 
+                  InputProps={{ startAdornment: (<InputAdornment position="start"><Search sx={{ color: '#667eea' }} /></InputAdornment>) }} 
+                  sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2, '& fieldset': { borderColor: 'rgba(102, 126, 234, 0.2)' }, '&:hover fieldset': { borderColor: 'rgba(102, 126, 234, 0.4)' }, '&.Mui-focused fieldset': { borderColor: '#667eea' } } }} 
                 />
               </Grid>
               <Grid item xs={12} md={6}>
-                <Box sx={{ display: 'flex', gap: 2, justifyContent: 'flex-end' }}>
+                <Box sx={{ display: 'flex', gap: 2, justifyContent: { xs: 'center', md: 'flex-end' } }}>
                   <Tabs 
                     value={filter} 
-                    onChange={handleFilterChange}
-                    sx={{
-                      '& .MuiTab-root': {
-                        textTransform: 'none',
-                        fontWeight: 600,
-                        color: '#667eea',
-                        '&.Mui-selected': {
-                          color: '#667eea',
-                        },
-                      },
-                      '& .MuiTabs-indicator': {
-                        backgroundColor: '#667eea',
-                      },
+                    onChange={handleFilterChange} 
+                    sx={{ 
+                      '& .MuiTab-root': { 
+                        textTransform: 'none', 
+                        fontWeight: 600, 
+                        color: '#667eea', 
+                        fontSize: { xs: '0.875rem', md: '1rem' },
+                        '&.Mui-selected': { color: '#667eea' } 
+                      }, 
+                      '& .MuiTabs-indicator': { backgroundColor: '#667eea' } 
                     }}
                   >
                     <Tab label="All" value="all" />
@@ -265,19 +214,15 @@ const Gallery = () => {
                   </Tabs>
                   <Tabs 
                     value={viewMode} 
-                    onChange={handleViewModeChange}
-                    sx={{
-                      '& .MuiTab-root': {
-                        minWidth: 'auto',
-                        textTransform: 'none',
-                        color: '#667eea',
-                        '&.Mui-selected': {
-                          color: '#667eea',
-                        },
-                      },
-                      '& .MuiTabs-indicator': {
-                        backgroundColor: '#667eea',
-                      },
+                    onChange={handleViewModeChange} 
+                    sx={{ 
+                      '& .MuiTab-root': { 
+                        minWidth: 'auto', 
+                        textTransform: 'none', 
+                        color: '#667eea', 
+                        '&.Mui-selected': { color: '#667eea' } 
+                      }, 
+                      '& .MuiTabs-indicator': { backgroundColor: '#667eea' } 
                     }}
                   >
                     <Tab icon={<ViewList />} value="grid" />
@@ -287,54 +232,28 @@ const Gallery = () => {
               </Grid>
             </Grid>
           </Box>
-
-          {/* Gallery Content */}
           {filteredMemories.length > 0 ? (
             viewMode === 'grid' ? (
-              <Grid container spacing={3}>
+              <Grid container spacing={{ xs: 1.5, md: 3 }}>
                 {filteredMemories.map((memory) => (
                   <Grid item xs={12} sm={6} md={4} key={memory._id}>
-                    <Card 
-                      onClick={() => handleMemoryClick(memory)}
-                      sx={{ 
-                        cursor: 'pointer',
-                        borderRadius: 3,
-                        overflow: 'hidden',
-                        transition: 'transform 0.2s',
-                        '&:hover': {
-                          transform: 'translateY(-4px)',
-                          boxShadow: '0 8px 25px rgba(0,0,0,0.15)'
-                        }
-                      }}
-                    >
-                      <CardMedia
-                        component="img"
-                        height="180"
-                        image={getImageUrl(memory)}
-                        alt={memory.title}
-                        sx={{ objectFit: 'cover' }}
-                      />
-                      <CardContent>
+                    <Card onClick={() => handleMemoryClick(memory)} sx={{ 
+                      cursor: 'pointer', 
+                      borderRadius: 3, 
+                      overflow: 'hidden', 
+                      transition: 'transform 0.2s', 
+                      '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 8px 25px rgba(0,0,0,0.15)' } 
+                    }}>
+                      <CardMedia component="img" height={{ xs: 160, md: 180 }} image={getImageUrl(memory)} alt={memory.title} sx={{ objectFit: 'cover' }} />
+                      <CardContent sx={{ p: { xs: 1.5, md: 2 } }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
-                          <Typography variant="h6" sx={{ fontWeight: 600, color: '#2d3748' }}>
-                            {memory.title}
-                          </Typography>
-                          <Chip
-                            label={memory.creator === 'niki' ? 'Niki' : 'Amish'}
-                            size="small"
-                            sx={{
-                              background: getCreatorColor(memory.creator),
-                              color: '#fff',
-                              fontWeight: 600
-                            }}
-                          />
+                          <Typography variant="h6" sx={{ fontWeight: 600, color: '#2d3748', fontSize: { xs: '1rem', md: '1.25rem' } }}>{memory.title}</Typography>
+                          <Chip label={memory.creator === 'niki' ? 'Niki' : 'Amish'} size="small" sx={{ background: getCreatorColor(memory.creator), color: '#fff', fontWeight: 600 }} />
                         </Box>
-                        <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                          {new Date(memory.date).toLocaleDateString()}
-                        </Typography>
+                        <Typography variant="body2" color="text.secondary" sx={{ mb: 1, fontSize: { xs: '0.75rem', md: '0.875rem' } }}>{new Date(memory.date).toLocaleDateString()}</Typography>
                         {memory.location && (
-                          <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center' }}>
-                            <LocationOn sx={{ fontSize: 16, mr: 0.5, color: '#667eea' }} />
+                          <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', fontSize: { xs: '0.75rem', md: '0.875rem' } }}>
+                            <LocationOn sx={{ fontSize: { xs: 14, md: 16 }, mr: 0.5, color: '#667eea' }} />
                             {memory.location}
                           </Typography>
                         )}
@@ -344,124 +263,52 @@ const Gallery = () => {
                 ))}
               </Grid>
             ) : (
-              <ImageList cols={3} gap={16}>
+              <ImageList cols={{ xs: 2, sm: 3, md: 3 }} gap={{ xs: 8, md: 16 }}>
                 {filteredMemories.map((memory) => (
-                  <ImageListItem 
-                    key={memory._id} 
-                    onClick={() => handleMemoryClick(memory)}
-                    sx={{ cursor: 'pointer' }}
-                  >
-                    <img 
-                      src={getImageUrl(memory)} 
-                      alt={memory.title} 
-                      loading="lazy" 
-                      style={{ borderRadius: 8 }} 
-                    />
-                    <ImageListItemBar
-                      title={memory.title}
+                  <ImageListItem key={memory._id} onClick={() => handleMemoryClick(memory)} sx={{ cursor: 'pointer' }}>
+                    <img src={getImageUrl(memory)} alt={memory.title} loading="lazy" style={{ borderRadius: 8 }} />
+                    <ImageListItemBar 
+                      title={memory.title} 
                       subtitle={
                         <Box>
-                          <Typography variant="body2" sx={{ color: '#fff' }}>
+                          <Typography variant="body2" sx={{ color: '#fff', fontSize: { xs: '0.75rem', md: '0.875rem' } }}>
                             {new Date(memory.date).toLocaleDateString()}
                           </Typography>
-                          <Chip
-                            label={memory.creator === 'niki' ? 'Niki' : 'Amish'}
-                            size="small"
-                            sx={{
-                              background: getCreatorColor(memory.creator),
-                              color: '#fff',
-                              fontWeight: 600,
-                              mt: 0.5
-                            }}
+                          <Chip 
+                            label={memory.creator === 'niki' ? 'Niki' : 'Amish'} 
+                            size="small" 
+                            sx={{ background: getCreatorColor(memory.creator), color: '#fff', fontWeight: 600, mt: 0.5 }} 
                           />
                         </Box>
-                      }
-                      sx={{
-                        background: 'linear-gradient(transparent, rgba(0,0,0,0.7))',
-                        borderRadius: '0 0 8px 8px'
-                      }}
+                      } 
+                      sx={{ background: 'linear-gradient(transparent, rgba(0,0,0,0.7))', borderRadius: '0 0 8px 8px' }} 
                     />
                   </ImageListItem>
                 ))}
               </ImageList>
             )
           ) : (
-            <Box sx={{ textAlign: 'center', py: 8 }}>
-              <Box sx={{
-                width: 120,
-                height: 120,
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                mx: 'auto',
-                mb: 3
-              }}>
-                <Favorite sx={{ fontSize: 60, color: '#fff' }} />
+            <Box sx={{ textAlign: 'center', py: { xs: 6, md: 8 } }}>
+              <Box sx={{ width: { xs: 60, md: 80 }, height: { xs: 60, md: 80 }, borderRadius: '50%', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', mb: 3 }}>
+                <Favorite sx={{ fontSize: { xs: 40, md: 60 }, color: '#fff' }} />
               </Box>
-              <Typography variant="h5" gutterBottom sx={{ fontWeight: 600, color: '#2d3748' }}>
-                {searchTerm ? 'No memories found' : 'No Memories Yet'}
-              </Typography>
-              <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-                {searchTerm ? 'Try adjusting your search or filters' : 'Create your first memory to start building your gallery!'}
-              </Typography>
-              {!searchTerm && (
-                <Button 
-                  variant="contained" 
-                  onClick={() => navigate('/create-memory')}
-                  sx={{
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                    borderRadius: 2,
-                    textTransform: 'none'
-                  }}
-                >
-                  Create Memory
-                </Button>
-              )}
+              <Typography variant="h5" gutterBottom sx={{ fontWeight: 600, color: '#2d3748', fontSize: { xs: '1.25rem', md: '1.5rem' } }}>{searchTerm ? 'No memories found' : 'No Memories Yet'}</Typography>
+              <Typography variant="body1" color="text.secondary" sx={{ mb: 3, fontSize: { xs: '0.875rem', md: '1rem' } }}>{searchTerm ? 'Try adjusting your search or filters' : 'Create your first memory to start building your gallery!'}</Typography>
+              {!searchTerm && (<Button variant="contained" onClick={() => navigate('/create-memory')}>Create Memory</Button>)}
             </Box>
           )}
         </Paper>
-
-        {/* Memory Detail Dialog */}
-        <Dialog 
-          open={!!selectedMemory} 
-          onClose={handleCloseDialog} 
-          maxWidth="md" 
-          fullWidth 
-          PaperProps={{ 
-            sx: { 
-              borderRadius: 3, 
-              background: 'rgba(255,255,255,0.95)', 
-              backdropFilter: 'blur(10px)' 
-            } 
-          }}
-        >
+        <Dialog open={!!selectedMemory} onClose={handleCloseDialog} maxWidth="md" fullWidth PaperProps={{ sx: { borderRadius: 3, background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(10px)' } }}>
           {selectedMemory && (
             <DialogContent>
               <Grid container spacing={3}>
                 <Grid item xs={12} md={6}>
-                  <CardMedia
-                    component="img"
-                    height="300"
-                    image={getImageUrl(selectedMemory)}
-                    alt={selectedMemory.title}
-                    sx={{ objectFit: 'cover', borderRadius: 2 }}
-                  />
+                  <CardMedia component="img" height={{ xs: 250, md: 300 }} image={getImageUrl(selectedMemory)} alt={selectedMemory.title} sx={{ objectFit: 'cover', borderRadius: 2 }} />
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
-                    <Typography variant="h4" sx={{ fontWeight: 700, color: '#2d3748' }}>
-                      {selectedMemory.title}
-                    </Typography>
-                    <Chip
-                      label={`Created by ${selectedMemory.creator === 'niki' ? 'Niki' : 'Amish'}`}
-                      sx={{
-                        background: getCreatorColor(selectedMemory.creator),
-                        color: '#fff',
-                        fontWeight: 600
-                      }}
-                    />
+                    <Typography variant="h4" sx={{ fontWeight: 700, color: '#2d3748', fontSize: { xs: '1.5rem', md: '2.125rem' } }}>{selectedMemory.title}</Typography>
+                    <Chip label={`Created by ${selectedMemory.creator === 'niki' ? 'Niki' : 'Amish'}`} sx={{ background: getCreatorColor(selectedMemory.creator), color: '#fff', fontWeight: 600 }} />
                   </Box>
                   <Typography variant="body1" color="text.secondary" sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
                     <CalendarToday sx={{ mr: 1, color: '#667eea' }} />
@@ -473,8 +320,7 @@ const Gallery = () => {
                       {selectedMemory.location}
                     </Typography>
                   )}
-                  
-                  {/* Notes Section */}
+
                   <Box sx={{ mb: 3 }}>
                     <Typography variant="h6" sx={{ fontWeight: 600, color: '#2d3748', mb: 1 }}>
                       Notes & Comments
@@ -488,8 +334,7 @@ const Gallery = () => {
                         No notes yet. Be the first to add one!
                       </Typography>
                     )}
-                    
-                    {/* Add Note Section */}
+
                     <Box sx={{ mt: 2 }}>
                       <Typography variant="body2" sx={{ fontWeight: 600, color: '#2d3748', mb: 1 }}>
                         Add a note as {user?.name || 'User'}:

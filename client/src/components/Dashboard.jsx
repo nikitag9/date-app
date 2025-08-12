@@ -201,118 +201,35 @@ const Dashboard = () => {
         {/* Quick Actions */}
         <Grid container spacing={3} sx={{ mb: 4 }}>
           <Grid item xs={12} md={4}>
-            <Card 
-              onClick={handleCreateMemory}
-              sx={{ 
-                background: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
-                borderRadius: 4,
-                boxShadow: '0 8px 32px rgba(252, 182, 159, 0.2)',
-                cursor: 'pointer',
-                transition: 'transform 0.2s',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 12px 40px rgba(252, 182, 159, 0.3)'
-                }
-              }}
-            >
-              <CardContent sx={{ textAlign: 'center', py: 4 }}>
-                <Box sx={{
-                  width: 60,
-                  height: 60,
-                  borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.3)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  mx: 'auto',
-                  mb: 2
-                }}>
-                  <Add sx={{ fontSize: 30, color: '#fff' }} />
+            <Card onClick={handleCreateMemory} sx={{ background: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)', borderRadius: 4, boxShadow: '0 8px 32px rgba(252, 182, 159, 0.2)', cursor: 'pointer', transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 12px 40px rgba(252, 182, 159, 0.3)' } }}>
+              <CardContent sx={{ textAlign: 'center', py: 4, px: 3 }}>
+                <Box sx={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', mb: 3 }}>
+                  <Add sx={{ fontSize: 40, color: '#fff' }} />
                 </Box>
-                <Typography variant="h6" sx={{ fontWeight: 600, color: '#fff', mb: 1 }}>
-                  Add New Memory
-                </Typography>
-                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.9)' }}>
-                  Create a new memory with photos and notes
-                </Typography>
+                <Typography variant="h6" sx={{ fontWeight: 600, color: '#fff', mb: 1, fontSize: { xs: '1rem', md: '1.25rem' } }}>Add New Memory</Typography>
+                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.9)', fontSize: { xs: '0.875rem', md: '1rem' } }}>Create a new memory with photos and notes</Typography>
               </CardContent>
             </Card>
           </Grid>
-
           <Grid item xs={12} md={4}>
-            <Card 
-              onClick={handleViewCalendar}
-              sx={{ 
-                background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
-                borderRadius: 4,
-                boxShadow: '0 8px 32px rgba(168, 237, 234, 0.2)',
-                cursor: 'pointer',
-                transition: 'transform 0.2s',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 12px 40px rgba(168, 237, 234, 0.3)'
-                }
-              }}
-            >
-              <CardContent sx={{ textAlign: 'center', py: 4 }}>
-                <Box sx={{
-                  width: 60,
-                  height: 60,
-                  borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.3)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  mx: 'auto',
-                  mb: 2
-                }}>
-                  <CalendarMonth sx={{ fontSize: 30, color: '#fff' }} />
+            <Card onClick={handleViewCalendar} sx={{ background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)', borderRadius: 4, boxShadow: '0 8px 32px rgba(168, 237, 234, 0.2)', cursor: 'pointer', transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 12px 40px rgba(168, 237, 234, 0.3)' } }}>
+              <CardContent sx={{ textAlign: 'center', py: 4, px: 3 }}>
+                <Box sx={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', mb: 3 }}>
+                  <CalendarMonth sx={{ fontSize: 40, color: '#fff' }} />
                 </Box>
-                <Typography variant="h6" sx={{ fontWeight: 600, color: '#fff', mb: 1 }}>
-                  Calendar View
-                </Typography>
-                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.9)' }}>
-                  See your memories on a beautiful calendar
-                </Typography>
+                <Typography variant="h6" sx={{ fontWeight: 600, color: '#fff', mb: 1, fontSize: { xs: '1rem', md: '1.25rem' } }}>Calendar View</Typography>
+                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.9)', fontSize: { xs: '0.875rem', md: '1rem' } }}>See your memories on a beautiful calendar</Typography>
               </CardContent>
             </Card>
           </Grid>
-
           <Grid item xs={12} md={4}>
-            <Card 
-              onClick={handleViewGallery}
-              sx={{ 
-                background: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
-                borderRadius: 4,
-                boxShadow: '0 8px 32px rgba(255, 154, 158, 0.2)',
-                cursor: 'pointer',
-                transition: 'transform 0.2s',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 12px 40px rgba(255, 154, 158, 0.3)'
-                }
-              }}
-            >
-              <CardContent sx={{ textAlign: 'center', py: 4 }}>
-                <Box sx={{
-                  width: 60,
-                  height: 60,
-                  borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.3)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  mx: 'auto',
-                  mb: 2
-                }}>
-                  <PhotoLibrary sx={{ fontSize: 30, color: '#fff' }} />
+            <Card onClick={handleViewGallery} sx={{ background: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)', borderRadius: 4, boxShadow: '0 8px 32px rgba(255, 154, 158, 0.2)', cursor: 'pointer', transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 12px 40px rgba(255, 154, 158, 0.3)' } }}>
+              <CardContent sx={{ textAlign: 'center', py: 4, px: 3 }}>
+                <Box sx={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', mb: 3 }}>
+                  <PhotoLibrary sx={{ fontSize: 40, color: '#fff' }} />
                 </Box>
-                <Typography variant="h6" sx={{ fontWeight: 600, color: '#fff', mb: 1 }}>
-                  Memory Gallery
-                </Typography>
-                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.9)' }}>
-                  Browse all your memories in a gallery view
-                </Typography>
+                <Typography variant="h6" sx={{ fontWeight: 600, color: '#fff', mb: 1, fontSize: { xs: '1rem', md: '1.25rem' } }}>Memory Gallery</Typography>
+                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.9)', fontSize: { xs: '0.875rem', md: '1rem' } }}>Browse all your memories in a gallery view</Typography>
               </CardContent>
             </Card>
           </Grid>
@@ -331,45 +248,7 @@ const Dashboard = () => {
           <Add />
         </Fab>
 
-        {/* PWA Installation Prompt */}
-        {showPwaPrompt && (
-          <Box sx={{ position: 'fixed', bottom: 80, left: 0, right: 0, zIndex: 1000, textAlign: 'center' }}>
-            <Alert
-              severity="info"
-              variant="filled"
-              sx={{
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                color: '#fff',
-                borderRadius: 3,
-                boxShadow: '0 8px 25px rgba(102, 126, 234, 0.3)',
-                '& .MuiAlert-icon': {
-                  color: '#fff',
-                },
-              }}
-              action={
-                <Button
-                  size="small"
-                  onClick={handlePwaInstall}
-                  sx={{
-                    color: '#fff',
-                    '&:hover': {
-                      background: 'rgba(255,255,255,0.2)',
-                    },
-                  }}
-                >
-                  <GetApp sx={{ fontSize: 20 }} />
-                </Button>
-              }
-            >
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <Close sx={{ fontSize: 20 }} />
-                <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                  Install this app for a better experience on your iOS device!
-                </Typography>
-              </Box>
-            </Alert>
-          </Box>
-        )}
+        {/* PWA Install Prompt Removed - It doesn't actually work */}
 
         {/* Snackbar for PWA installation */}
         <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar}>
