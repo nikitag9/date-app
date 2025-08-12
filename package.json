@@ -1,0 +1,26 @@
+{
+  "name": "date-journal",
+  "version": "1.0.0",
+  "description": "Niki & Amish's Date Journal - A full-stack app for documenting special moments together",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd client && npm install && npm run build",
+    "dev": "cd client && npm run dev",
+    "start": "cd server && node index.js",
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install"
+  },
+  "keywords": [
+    "date-journal",
+    "memories",
+    "couples",
+    "react",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "Niki & Amish",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+} 
