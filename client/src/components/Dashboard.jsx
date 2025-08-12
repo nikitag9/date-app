@@ -1,27 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Container,
-  Box,
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-  Button,
-  Fab,
-  Chip,
-  Alert,
-  Snackbar
+  Container, Box, Typography, Grid, Card, CardContent, Button, Fab, Chip, Alert, Snackbar
 } from '@mui/material';
-import {
-  Add,
-  Favorite,
-  CalendarMonth,
-  PhotoLibrary,
-  Person,
-  GetApp,
-  Close
-} from '@mui/icons-material';
+import { Add, Favorite, CalendarMonth, PhotoLibrary, Person, GetApp, Close } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
 
 const Dashboard = () => {
@@ -42,34 +24,18 @@ const Dashboard = () => {
   const handleUserSelect = (userType) => {
     setSelectedUser(userType);
     setShowUserSelect(false);
-    // Update the user in localStorage
-    const userData = {
-      id: userType,
-      name: userType === 'niki' ? 'Niki' : 'Amish',
-      type: userType
-    };
+    const userData = { id: userType, name: userType === 'niki' ? 'Niki' : 'Amish', type: userType };
     localStorage.setItem('user', JSON.stringify(userData));
-    // Reload the page to update the auth context
     window.location.reload();
   };
 
-  const handleCreateMemory = () => {
-    navigate('/create-memory');
-  };
-
-  const handleViewCalendar = () => {
-    navigate('/calendar');
-  };
-
-  const handleViewGallery = () => {
-    navigate('/gallery');
-  };
+  const handleCreateMemory = () => { navigate('/create-memory'); };
+  const handleViewCalendar = () => { navigate('/calendar'); };
+  const handleViewGallery = () => { navigate('/gallery'); };
 
   const handlePwaInstall = () => {
     setShowPwaPrompt(false);
     setSnackbarOpen(true);
-    // Optionally, you can add a more robust PWA installation logic here
-    // For example, using the Web App Manifest API
   };
 
   const handleCloseSnackbar = (event, reason) => {
@@ -80,93 +46,101 @@ const Dashboard = () => {
   };
 
   const getUserColor = (userType) => {
-    return userType === 'niki' 
-      ? 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)'
-      : 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)';
+    return userType === 'niki' ? 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)' : 'linear-gradient(135deg, #4ECDC4 0%, #7EDDD6 100%)';
   };
 
-  // User Selection Screen
   if (showUserSelect) {
     return (
-      <Box sx={{
-        minHeight: '100vh',
-        background: 'linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        py: 4
+      <Box sx={{ 
+        minHeight: '100vh', 
+        background: 'linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%)', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        py: 4,
+        px: 2
       }}>
         <Container maxWidth="sm">
           <Box sx={{ textAlign: 'center' }}>
-            <Box sx={{
-              width: 120,
-              height: 120,
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              mx: 'auto',
-              mb: 4
+            <Box sx={{ 
+              width: { xs: 100, md: 120 }, 
+              height: { xs: 100, md: 120 }, 
+              borderRadius: '50%', 
+              background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              mx: 'auto', 
+              mb: 4,
+              boxShadow: '0 16px 48px rgba(255,107,107,0.3)'
             }}>
-              <Favorite sx={{ fontSize: 60, color: '#fff' }} />
+              <Favorite sx={{ fontSize: { xs: 50, md: 60 }, color: '#fff' }} />
             </Box>
-            <Typography variant="h3" component="h1" gutterBottom sx={{ fontWeight: 700, color: '#2d3748' }}>
+            <Typography variant="h3" component="h1" gutterBottom sx={{ 
+              fontWeight: 700, 
+              color: '#2D3748',
+              fontSize: { xs: '2rem', md: '2.5rem' },
+              mb: 2
+            }}>
               Welcome to Your Date Journal
             </Typography>
-            <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
+            <Typography variant="h6" color="text.secondary" sx={{ 
+              mb: 4,
+              fontSize: { xs: '1rem', md: '1.25rem' },
+              color: '#718096'
+            }}>
               Choose who you are to continue
             </Typography>
-
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 4 }}>
-              <Button
-                variant="contained"
-                size="large"
-                onClick={() => handleUserSelect('niki')}
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, mb: 4 }}>
+              <Button 
+                variant="contained" 
+                size="large" 
+                onClick={() => handleUserSelect('niki')} 
                 sx={{ 
-                  py: 3,
-                  background: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
-                  borderRadius: 3,
-                  textTransform: 'none',
-                  fontSize: '1.3rem',
-                  fontWeight: 600,
-                  color: '#fff',
-                  '&:hover': {
-                    background: 'linear-gradient(135deg, #ff8a8e 0%, #febfef 100%)',
-                    transform: 'translateY(-2px)',
-                    boxShadow: '0 8px 25px rgba(255, 154, 158, 0.3)'
-                  }
+                  py: 3, 
+                  background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)', 
+                  borderRadius: 3, 
+                  textTransform: 'none', 
+                  fontSize: { xs: '1.1rem', md: '1.3rem' }, 
+                  fontWeight: 600, 
+                  color: '#fff', 
+                  boxShadow: '0 8px 32px rgba(255,107,107,0.3)',
+                  '&:hover': { 
+                    background: 'linear-gradient(135deg, #E55555 0%, #FF6B6B 100%)', 
+                    transform: 'translateY(-2px)', 
+                    boxShadow: '0 12px 40px rgba(255,107,107,0.4)' 
+                  } 
                 }}
               >
-                <Person sx={{ mr: 2, fontSize: 28 }} />
-                I'm Niki
+                <Person sx={{ mr: 2, fontSize: { xs: 24, md: 28 } }} /> I'm Niki
               </Button>
-
-              <Button
-                variant="contained"
-                size="large"
-                onClick={() => handleUserSelect('amish')}
+              <Button 
+                variant="contained" 
+                size="large" 
+                onClick={() => handleUserSelect('amish')} 
                 sx={{ 
-                  py: 3,
-                  background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
-                  borderRadius: 3,
-                  textTransform: 'none',
-                  fontSize: '1.3rem',
-                  fontWeight: 600,
-                  color: '#fff',
-                  '&:hover': {
-                    background: 'linear-gradient(135deg, #98dde0 0%, #fec6e3 100%)',
-                    transform: 'translateY(-2px)',
-                    boxShadow: '0 8px 25px rgba(168, 237, 234, 0.3)'
-                  }
+                  py: 3, 
+                  background: 'linear-gradient(135deg, #4ECDC4 0%, #7EDDD6 100%)', 
+                  borderRadius: 3, 
+                  textTransform: 'none', 
+                  fontSize: { xs: '1.1rem', md: '1.3rem' }, 
+                  fontWeight: 600, 
+                  color: '#fff', 
+                  boxShadow: '0 8px 32px rgba(78,205,196,0.3)',
+                  '&:hover': { 
+                    background: 'linear-gradient(135deg, #3BA89F 0%, #4ECDC4 100%)', 
+                    transform: 'translateY(-2px)', 
+                    boxShadow: '0 12px 40px rgba(78,205,196,0.4)' 
+                  } 
                 }}
               >
-                <Person sx={{ mr: 2, fontSize: 28 }} />
-                I'm Amish
+                <Person sx={{ mr: 2, fontSize: { xs: 24, md: 28 } }} /> I'm Amish
               </Button>
             </Box>
-
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text.secondary" sx={{ 
+              fontSize: { xs: '0.875rem', md: '1rem' },
+              color: '#718096'
+            }}>
               Your memories will be marked with who created them
             </Typography>
           </Box>
@@ -176,60 +150,203 @@ const Dashboard = () => {
   }
 
   return (
-    <Box sx={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%)',
-      py: 3
+    <Box sx={{ 
+      minHeight: '100vh', 
+      background: 'linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%)', 
+      py: { xs: 2, md: 4 },
+      px: 2
     }}>
       <Container maxWidth="lg">
-        {/* Welcome Section */}
-        <Box sx={{ mb: 4, textAlign: 'center' }}>
-          <Box sx={{ width: 80, height: 80, borderRadius: '50%', background: getUserColor(selectedUser), display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', mb: 2 }}>
-            <Favorite sx={{ color: '#fff', fontSize: 24 }} />
+        {/* Header Section */}
+        <Box sx={{ 
+          mb: { xs: 3, md: 5 }, 
+          textAlign: 'center',
+          background: 'rgba(255,255,255,0.8)',
+          borderRadius: 4,
+          p: { xs: 3, md: 4 },
+          backdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255,255,255,0.8)',
+          boxShadow: '0 16px 48px rgba(0,0,0,0.08)'
+        }}>
+          <Box sx={{ 
+            width: { xs: 60, md: 80 }, 
+            height: { xs: 60, md: 80 }, 
+            borderRadius: '50%', 
+            background: getUserColor(selectedUser), 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            mx: 'auto', 
+            mb: 3,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.15)'
+          }}>
+            <Favorite sx={{ color: '#fff', fontSize: { xs: 20, md: 24 } }} />
           </Box>
-          <Typography variant="h5" sx={{ fontWeight: 600, color: '#2d3748' }}>Hi, {selectedUser === 'niki' ? 'Niki' : 'Amish'}!</Typography>
-          <Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: 700, background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', mb: 2 }}>Niki & Amish's Date Journal</Typography>
-          <Typography
-            variant="body1"
-            color="text.secondary"
-            sx={{ mb: 3, fontWeight: 400, fontSize: '1.1rem' }}
-          >
+          <Typography variant="h4" sx={{ 
+            fontWeight: 600, 
+            color: '#2D3748',
+            fontSize: { xs: '1.5rem', md: '2rem' },
+            mb: 1
+          }}>
+            Hi, {selectedUser === 'niki' ? 'Niki' : 'Amish'}! 💕
+          </Typography>
+          <Typography variant="h3" component="h1" gutterBottom sx={{ 
+            fontWeight: 700, 
+            background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%)', 
+            backgroundClip: 'text', 
+            WebkitBackgroundClip: 'text', 
+            WebkitTextFillColor: 'transparent', 
+            mb: 2,
+            fontSize: { xs: '1.75rem', md: '2.5rem' }
+          }}>
+            Niki & Amish's Date Journal
+          </Typography>
+          <Typography variant="body1" color="text.secondary" sx={{ 
+            mb: 0,
+            fontWeight: 400, 
+            fontSize: { xs: '1rem', md: '1.125rem' },
+            color: '#718096',
+            maxWidth: '600px',
+            mx: 'auto'
+          }}>
             Document and cherish your special moments together
           </Typography>
         </Box>
 
-        {/* Quick Actions */}
-        <Grid container spacing={3} sx={{ mb: 4 }}>
-          <Grid item xs={12} md={4}>
-            <Card onClick={handleCreateMemory} sx={{ background: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)', borderRadius: 4, boxShadow: '0 8px 32px rgba(252, 182, 159, 0.2)', cursor: 'pointer', transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 12px 40px rgba(252, 182, 159, 0.3)' } }}>
-              <CardContent sx={{ textAlign: 'center', py: 4, px: 3 }}>
-                <Box sx={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', mb: 3 }}>
-                  <Add sx={{ fontSize: 40, color: '#fff' }} />
+        {/* Action Cards */}
+        <Grid container spacing={{ xs: 2, md: 3 }} sx={{ mb: 5 }}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Card onClick={handleCreateMemory} sx={{ 
+              background: 'linear-gradient(135deg, #FFE8D6 0%, #FFD4B3 100%)', 
+              borderRadius: 4, 
+              boxShadow: '0 8px 32px rgba(255,212,179,0.3)', 
+              cursor: 'pointer', 
+              transition: 'all 0.3s ease', 
+              height: '100%',
+              '&:hover': { 
+                transform: 'translateY(-8px)', 
+                boxShadow: '0 16px 48px rgba(255,212,179,0.4)' 
+              } 
+            }}>
+              <CardContent sx={{ textAlign: 'center', py: { xs: 3, md: 4 }, px: { xs: 2, md: 3 } }}>
+                <Box sx={{ 
+                  width: { xs: 60, md: 80 }, 
+                  height: { xs: 60, md: 80 }, 
+                  borderRadius: '50%', 
+                  background: 'rgba(255,255,255,0.3)', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  mx: 'auto', 
+                  mb: 3,
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.1)'
+                }}>
+                  <Add sx={{ fontSize: { xs: 28, md: 36 }, color: '#fff' }} />
                 </Box>
-                <Typography variant="h6" sx={{ fontWeight: 600, color: '#fff', mb: 1, fontSize: { xs: '1rem', md: '1.25rem' } }}>Add New Memory</Typography>
-                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.9)', fontSize: { xs: '0.875rem', md: '1rem' } }}>Create a new memory with photos and notes</Typography>
+                <Typography variant="h6" sx={{ 
+                  fontWeight: 600, 
+                  color: '#2D3748', 
+                  mb: 1,
+                  fontSize: { xs: '1.1rem', md: '1.25rem' }
+                }}>
+                  Add New Memory
+                </Typography>
+                <Typography variant="body2" sx={{ 
+                  color: '#4A5568',
+                  fontSize: { xs: '0.875rem', md: '1rem' }
+                }}>
+                  Create a new memory with photos and notes
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={12} md={4}>
-            <Card onClick={handleViewCalendar} sx={{ background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)', borderRadius: 4, boxShadow: '0 8px 32px rgba(168, 237, 234, 0.2)', cursor: 'pointer', transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 12px 40px rgba(168, 237, 234, 0.3)' } }}>
-              <CardContent sx={{ textAlign: 'center', py: 4, px: 3 }}>
-                <Box sx={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', mb: 3 }}>
-                  <CalendarMonth sx={{ fontSize: 40, color: '#fff' }} />
+          <Grid item xs={12} sm={6} md={4}>
+            <Card onClick={handleViewCalendar} sx={{ 
+              background: 'linear-gradient(135deg, #E6FFFA 0%, #B2F5EA 100%)', 
+              borderRadius: 4, 
+              boxShadow: '0 8px 32px rgba(178,245,234,0.3)', 
+              cursor: 'pointer', 
+              transition: 'all 0.3s ease', 
+              height: '100%',
+              '&:hover': { 
+                transform: 'translateY(-8px)', 
+                boxShadow: '0 16px 48px rgba(178,245,234,0.4)' 
+              } 
+            }}>
+              <CardContent sx={{ textAlign: 'center', py: { xs: 3, md: 4 }, px: { xs: 2, md: 3 } }}>
+                <Box sx={{ 
+                  width: { xs: 60, md: 80 }, 
+                  height: { xs: 60, md: 80 }, 
+                  borderRadius: '50%', 
+                  background: 'rgba(255,255,255,0.3)', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  mx: 'auto', 
+                  mb: 3,
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.1)'
+                }}>
+                  <CalendarMonth sx={{ fontSize: { xs: 28, md: 36 }, color: '#fff' }} />
                 </Box>
-                <Typography variant="h6" sx={{ fontWeight: 600, color: '#fff', mb: 1, fontSize: { xs: '1rem', md: '1.25rem' } }}>Calendar View</Typography>
-                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.9)', fontSize: { xs: '0.875rem', md: '1rem' } }}>See your memories on a beautiful calendar</Typography>
+                <Typography variant="h6" sx={{ 
+                  fontWeight: 600, 
+                  color: '#2D3748', 
+                  mb: 1,
+                  fontSize: { xs: '1.1rem', md: '1.25rem' }
+                }}>
+                  Calendar View
+                </Typography>
+                <Typography variant="body2" sx={{ 
+                  color: '#4A5568',
+                  fontSize: { xs: '0.875rem', md: '1rem' }
+                }}>
+                  See your memories on a beautiful calendar
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={12} md={4}>
-            <Card onClick={handleViewGallery} sx={{ background: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)', borderRadius: 4, boxShadow: '0 8px 32px rgba(255, 154, 158, 0.2)', cursor: 'pointer', transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 12px 40px rgba(255, 154, 158, 0.3)' } }}>
-              <CardContent sx={{ textAlign: 'center', py: 4, px: 3 }}>
-                <Box sx={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', mx: 'auto', mb: 3 }}>
-                  <PhotoLibrary sx={{ fontSize: 40, color: '#fff' }} />
+          <Grid item xs={12} sm={6} md={4}>
+            <Card onClick={handleViewGallery} sx={{ 
+              background: 'linear-gradient(135deg, #FED7D7 0%, #FEB2B2 100%)', 
+              borderRadius: 4, 
+              boxShadow: '0 8px 32px rgba(254,178,178,0.3)', 
+              cursor: 'pointer', 
+              transition: 'all 0.3s ease', 
+              height: '100%',
+              '&:hover': { 
+                transform: 'translateY(-8px)', 
+                boxShadow: '0 16px 48px rgba(254,178,178,0.4)' 
+              } 
+            }}>
+              <CardContent sx={{ textAlign: 'center', py: { xs: 3, md: 4 }, px: { xs: 2, md: 3 } }}>
+                <Box sx={{ 
+                  width: { xs: 60, md: 80 }, 
+                  height: { xs: 60, md: 80 }, 
+                  borderRadius: '50%', 
+                  background: 'rgba(255,255,255,0.3)', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  mx: 'auto', 
+                  mb: 3,
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.1)'
+                }}>
+                  <PhotoLibrary sx={{ fontSize: { xs: 28, md: 36 }, color: '#fff' }} />
                 </Box>
-                <Typography variant="h6" sx={{ fontWeight: 600, color: '#fff', mb: 1, fontSize: { xs: '1rem', md: '1.25rem' } }}>Memory Gallery</Typography>
-                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.9)', fontSize: { xs: '0.875rem', md: '1rem' } }}>Browse all your memories in a gallery view</Typography>
+                <Typography variant="h6" sx={{ 
+                  fontWeight: 600, 
+                  color: '#2D3748', 
+                  mb: 1,
+                  fontSize: { xs: '1.1rem', md: '1.25rem' }
+                }}>
+                  Memory Gallery
+                </Typography>
+                <Typography variant="body2" sx={{ 
+                  color: '#4A5568',
+                  fontSize: { xs: '0.875rem', md: '1rem' }
+                }}>
+                  Browse all your memories in a gallery view
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
@@ -238,19 +355,24 @@ const Dashboard = () => {
         {/* Floating Action Button */}
         <Fab 
           sx={{ 
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            position: 'fixed',
-            bottom: 24,
-            right: 24
+            background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
+            position: 'fixed', 
+            bottom: { xs: 16, md: 24 }, 
+            right: { xs: 16, md: 24 },
+            width: { xs: 56, md: 64 },
+            height: { xs: 56, md: 64 },
+            boxShadow: '0 8px 24px rgba(255,107,107,0.4)',
+            '&:hover': {
+              background: 'linear-gradient(135deg, #E55555 0%, #FF6B6B 100%)',
+              transform: 'scale(1.1)',
+            }
           }} 
           onClick={handleCreateMemory}
         >
-          <Add />
+          <Add sx={{ fontSize: { xs: 24, md: 28 } }} />
         </Fab>
 
-        {/* PWA Install Prompt Removed - It doesn't actually work */}
-
-        {/* Snackbar for PWA installation */}
+        {/* PWA Install Prompt Removed */}
         <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar}>
           <Alert onClose={handleCloseSnackbar} severity="info" sx={{ width: '100%' }}>
             App installed successfully! You can now use it as a standalone app.
