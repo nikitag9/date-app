@@ -154,51 +154,109 @@ const Calendar = () => {
   }
 
   return (
-    <Box sx={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%)', py: { xs: 2, md: 3 } }}>
+    <Box sx={{ 
+      minHeight: '100vh', 
+      background: 'linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%)', 
+      py: { xs: 2, md: 3 },
+      px: 2
+    }}>
       <Container maxWidth="lg">
-        <Paper elevation={0} sx={{ p: { xs: 2, md: 4 }, borderRadius: 4, background: 'rgba(255,255,255,0.8)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)' }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 2, md: 4 } }}>
-            <IconButton onClick={() => navigate('/')} sx={{ mr: 2, background: 'rgba(102, 126, 234, 0.1)', '&:hover': { background: 'rgba(102, 126, 234, 0.2)' } }}><ArrowBack /></IconButton>
-            <Typography variant="h4" component="h1" sx={{ fontWeight: 700, color: '#2d3748', fontSize: { xs: '1.5rem', md: '2.125rem' } }}>Calendar View</Typography>
+        <Paper elevation={0} sx={{ 
+          p: { xs: 3, md: 4 }, 
+          borderRadius: 4, 
+          background: 'rgba(255,255,255,0.9)', 
+          backdropFilter: 'blur(20px)', 
+          border: '1px solid rgba(255,255,255,0.8)',
+          boxShadow: '0 16px 48px rgba(0,0,0,0.08)'
+        }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 3, md: 4 } }}>
+            <IconButton onClick={() => navigate('/')} sx={{ 
+              mr: 2, 
+              background: 'rgba(255,107,107,0.1)', 
+              color: '#FF6B6B',
+              '&:hover': { background: 'rgba(255,107,107,0.2)' } 
+            }}>
+              <ArrowBack />
+            </IconButton>
+            <Typography variant="h4" component="h1" sx={{ 
+              fontWeight: 700, 
+              color: '#2D3748', 
+              fontSize: { xs: '1.5rem', md: '2.125rem' } 
+            }}>
+              Calendar View
+            </Typography>
           </Box>
-          {error && (<Alert severity="error" sx={{ mb: 3, borderRadius: 2 }}>{error}</Alert>)}
+          {error && (<Alert severity="error" sx={{ mb: 3, borderRadius: 3 }}>{error}</Alert>)}
           
           {/* Month/Year Navigation */}
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: { xs: 2, md: 4 } }}>
-            <IconButton onClick={() => changeMonth(-1)} sx={{ color: '#667eea' }}><ChevronLeft /></IconButton>
+          <Box sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            mb: { xs: 3, md: 4 },
+            background: 'rgba(255,255,255,0.8)',
+            borderRadius: 3,
+            p: { xs: 2, md: 3 },
+            boxShadow: '0 8px 24px rgba(0,0,0,0.06)'
+          }}>
+            <IconButton onClick={() => changeMonth(-1)} sx={{ 
+              color: '#FF6B6B',
+              background: 'rgba(255,107,107,0.1)',
+              '&:hover': { background: 'rgba(255,107,107,0.2)' }
+            }}>
+              <ChevronLeft />
+            </IconButton>
             <Button
               onClick={handleMonthYearClick}
               sx={{ 
                 mx: 3, 
                 fontWeight: 600, 
-                color: '#2d3748',
+                color: '#2D3748',
                 fontSize: { xs: '1.1rem', md: '1.5rem' },
                 textTransform: 'none',
-                '&:hover': { background: 'rgba(102, 126, 234, 0.1)' }
+                background: 'rgba(255,107,107,0.05)',
+                borderRadius: 2,
+                px: 3,
+                '&:hover': { 
+                  background: 'rgba(255,107,107,0.1)',
+                  transform: 'scale(1.02)'
+                } 
               }}
             >
               {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
             </Button>
-            <IconButton onClick={() => changeMonth(1)} sx={{ color: '#667eea' }}><ChevronRight /></IconButton>
+            <IconButton onClick={() => changeMonth(1)} sx={{ 
+              color: '#FF6B6B',
+              background: 'rgba(255,107,107,0.1)',
+              '&:hover': { background: 'rgba(255,107,107,0.2)' }
+            }}>
+              <ChevronRight />
+            </IconButton>
           </Box>
 
           {/* Date Picker Dialog */}
           <Dialog open={showDatePicker} onClose={() => setShowDatePicker(false)} maxWidth="xs" fullWidth>
-            <DialogContent>
-              <Typography variant="h6" sx={{ mb: 2, textAlign: 'center' }}>Select Month & Year</Typography>
+            <DialogContent sx={{ p: 4 }}>
+              <Typography variant="h6" sx={{ mb: 3, textAlign: 'center', fontWeight: 600, color: '#2D3748' }}>
+                Select Month & Year
+              </Typography>
               <TextField
                 type="month"
                 fullWidth
                 value={`${currentMonth.getFullYear()}-${String(currentMonth.getMonth() + 1).padStart(2, '0')}`}
                 onChange={handleDatePickerChange}
                 InputLabelProps={{ shrink: true }}
-                sx={{ mb: 2 }}
+                sx={{ mb: 3 }}
               />
               <Button
                 fullWidth
                 variant="contained"
                 onClick={() => setShowDatePicker(false)}
-                sx={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+                sx={{ 
+                  background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
+                  borderRadius: 3,
+                  py: 1.5
+                }}
               >
                 Close
               </Button>
@@ -209,21 +267,24 @@ const Calendar = () => {
           <Box sx={{ 
             display: 'grid', 
             gridTemplateColumns: 'repeat(7, 1fr)', 
-            gap: { xs: 0.5, md: 1 }, 
-            mb: 3, 
-            border: '1px solid rgba(102, 126, 234, 0.2)', 
-            borderRadius: 2, 
-            overflow: 'hidden' 
+            gap: { xs: 1, md: 1.5 }, 
+            mb: 4, 
+            border: '2px solid rgba(255,107,107,0.2)', 
+            borderRadius: 3, 
+            overflow: 'hidden',
+            background: 'rgba(255,255,255,0.6)',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.06)'
           }}>
             {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
               <Box key={day} sx={{ 
-                p: { xs: 1, md: 2 }, 
+                p: { xs: 1.5, md: 2 }, 
                 textAlign: 'center', 
-                background: 'rgba(102, 126, 234, 0.1)', 
-                borderBottom: '1px solid rgba(102, 126, 234, 0.2)', 
-                fontWeight: 600, 
-                color: '#2d3748',
-                fontSize: { xs: '0.75rem', md: '0.875rem' }
+                background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)', 
+                borderBottom: '2px solid rgba(255,107,107,0.2)', 
+                fontWeight: 700, 
+                color: '#fff',
+                fontSize: { xs: '0.75rem', md: '0.875rem' },
+                textShadow: '0 1px 2px rgba(0,0,0,0.1)'
               }}>
                 {day}
               </Box>
@@ -234,19 +295,27 @@ const Calendar = () => {
               const isCurrentMonthDate = isCurrentMonth(date);
               return (
                 <Box key={index} sx={{ 
-                  minHeight: { xs: 80, md: 120 }, 
-                  p: { xs: 0.5, md: 1 }, 
-                  border: '1px solid rgba(102, 126, 234, 0.1)', 
-                  background: isTodayDate ? 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)' : 'transparent', 
-                  position: 'relative' 
+                  minHeight: { xs: 80, md: 100 }, 
+                  p: { xs: 1, md: 1.5 }, 
+                  border: '1px solid rgba(255,107,107,0.1)', 
+                  background: isTodayDate 
+                    ? 'linear-gradient(135deg, rgba(255,107,107,0.15) 0%, rgba(255,142,142,0.15) 100%)' 
+                    : 'transparent', 
+                  position: 'relative',
+                  transition: 'all 0.2s ease',
+                  '&:hover': {
+                    background: 'rgba(255,107,107,0.05)',
+                    transform: 'scale(1.02)'
+                  }
                 }}>
                   {date && (
                     <>
                       <Typography variant="body2" sx={{ 
-                        fontWeight: isTodayDate ? 700 : 500, 
-                        color: isCurrentMonthDate ? '#2d3748' : '#a0aec0', 
+                        fontWeight: isTodayDate ? 800 : 600, 
+                        color: isCurrentMonthDate ? '#2D3748' : '#A0AEC0', 
                         mb: 1,
-                        fontSize: { xs: '0.75rem', md: '0.875rem' }
+                        fontSize: { xs: '0.875rem', md: '1rem' },
+                        textAlign: 'center'
                       }}>
                         {date.getDate()}
                       </Typography>
@@ -261,9 +330,13 @@ const Calendar = () => {
                               background: getCreatorColor(memory.creator), 
                               color: '#fff', 
                               fontSize: { xs: '0.6rem', md: '0.7rem' }, 
-                              height: { xs: 16, md: 20 }, 
+                              height: { xs: 18, md: 22 }, 
                               cursor: 'pointer', 
-                              '&:hover': { opacity: 0.8 } 
+                              fontWeight: 600,
+                              '&:hover': { 
+                                opacity: 0.8,
+                                transform: 'scale(1.05)'
+                              } 
                             }} 
                           />
                         ))}
@@ -272,10 +345,11 @@ const Calendar = () => {
                             label={`+${dayMemories.length - 2} more`} 
                             size="small" 
                             sx={{ 
-                              background: 'rgba(102, 126, 234, 0.2)', 
-                              color: '#667eea', 
+                              background: 'rgba(255,107,107,0.2)', 
+                              color: '#FF6B6B', 
                               fontSize: { xs: '0.6rem', md: '0.7rem' }, 
-                              height: { xs: 16, md: 20 } 
+                              height: { xs: 18, md: 22 },
+                              fontWeight: 600
                             }} 
                           />
                         )}
@@ -288,13 +362,21 @@ const Calendar = () => {
           </Box>
 
           {/* Memories This Month Section */}
-          <Box sx={{ mt: 4 }}>
-            <Typography variant="h5" gutterBottom sx={{ fontWeight: 600, color: '#2d3748', mb: 3, fontSize: { xs: '1.25rem', md: '1.5rem' } }}>Memories This Month</Typography>
+          <Box sx={{ mt: 5 }}>
+            <Typography variant="h5" gutterBottom sx={{ 
+              fontWeight: 600, 
+              color: '#2D3748', 
+              mb: 3, 
+              fontSize: { xs: '1.25rem', md: '1.5rem' },
+              textAlign: 'center'
+            }}>
+              Memories This Month
+            </Typography>
             {memories.filter(memory => { 
               const memoryDate = new Date(memory.date); 
               return memoryDate.getMonth() === currentMonth.getMonth() && memoryDate.getFullYear() === currentMonth.getFullYear(); 
             }).length > 0 ? (
-              <Grid container spacing={2}>
+              <Grid container spacing={{ xs: 2, md: 3 }}>
                 {memories.filter(memory => { 
                   const memoryDate = new Date(memory.date); 
                   return memoryDate.getMonth() === currentMonth.getMonth() && memoryDate.getFullYear() === currentMonth.getFullYear(); 
@@ -304,19 +386,49 @@ const Calendar = () => {
                       cursor: 'pointer', 
                       borderRadius: 3, 
                       overflow: 'hidden', 
-                      transition: 'transform 0.2s', 
-                      '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 8px 25px rgba(0,0,0,0.15)' } 
+                      transition: 'all 0.3s ease', 
+                      height: '100%',
+                      '&:hover': { 
+                        transform: 'translateY(-8px)', 
+                        boxShadow: '0 16px 48px rgba(0,0,0,0.15)' 
+                      } 
                     }}>
-                      <CardMedia component="img" height={{ xs: 120, md: 150 }} image={getImageUrl(memory)} alt={memory.title} sx={{ objectFit: 'cover' }} />
-                      <CardContent sx={{ p: { xs: 1.5, md: 2 } }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
-                          <Typography variant="h6" sx={{ fontWeight: 600, color: '#2d3748', fontSize: { xs: '1rem', md: '1.25rem' } }}>{memory.title}</Typography>
-                          <Chip label={memory.creator === 'niki' ? 'Niki' : 'Amish'} size="small" sx={{ background: getCreatorColor(memory.creator), color: '#fff', fontWeight: 600 }} />
+                      <CardMedia component="img" height={{ xs: 140, md: 160 }} image={getImageUrl(memory)} alt={memory.title} sx={{ objectFit: 'cover' }} />
+                      <CardContent sx={{ p: { xs: 2, md: 2.5 } }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.5 }}>
+                          <Typography variant="h6" sx={{ 
+                            fontWeight: 600, 
+                            color: '#2D3748', 
+                            fontSize: { xs: '1rem', md: '1.125rem' } 
+                          }}>
+                            {memory.title}
+                          </Typography>
+                          <Chip 
+                            label={memory.creator === 'niki' ? 'Niki' : 'Amish'} 
+                            size="small" 
+                            sx={{ 
+                              background: getCreatorColor(memory.creator), 
+                              color: '#fff', 
+                              fontWeight: 600,
+                              fontSize: '0.75rem'
+                            }} 
+                          />
                         </Box>
-                        <Typography variant="body2" color="text.secondary" sx={{ mb: 1, fontSize: { xs: '0.75rem', md: '0.875rem' } }}>{new Date(memory.date).toLocaleDateString()}</Typography>
+                        <Typography variant="body2" color="text.secondary" sx={{ 
+                          mb: 1.5, 
+                          fontSize: { xs: '0.75rem', md: '0.875rem' },
+                          color: '#718096'
+                        }}>
+                          {new Date(memory.date).toLocaleDateString()}
+                        </Typography>
                         {memory.location && (
-                          <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', fontSize: { xs: '0.75rem', md: '0.875rem' } }}>
-                            <LocationOn sx={{ fontSize: { xs: 14, md: 16 }, mr: 0.5, color: '#667eea' }} />
+                          <Typography variant="body2" color="text.secondary" sx={{ 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            fontSize: { xs: '0.75rem', md: '0.875rem' },
+                            color: '#718096'
+                          }}>
+                            <LocationOn sx={{ fontSize: { xs: 14, md: 16 }, mr: 0.5, color: '#FF6B6B' }} />
                             {memory.location}
                           </Typography>
                         )}
@@ -326,57 +438,134 @@ const Calendar = () => {
                 ))}
               </Grid>
             ) : (
-              <Box sx={{ textAlign: 'center', py: 4 }}>
-                <Typography variant="h6" color="text.secondary" gutterBottom sx={{ fontSize: { xs: '1.1rem', md: '1.25rem' } }}>No memories this month</Typography>
-                <Button variant="contained" onClick={() => navigate('/create-memory')}>Create Memory</Button>
+              <Box sx={{ 
+                textAlign: 'center', 
+                py: { xs: 6, md: 8 },
+                background: 'rgba(255,255,255,0.6)',
+                borderRadius: 3,
+                border: '2px dashed rgba(255,107,107,0.3)'
+              }}>
+                <Typography variant="h6" color="text.secondary" gutterBottom sx={{ 
+                  fontSize: { xs: '1.1rem', md: '1.25rem' },
+                  color: '#718096',
+                  mb: 2
+                }}>
+                  No memories this month
+                </Typography>
+                <Button 
+                  variant="contained" 
+                  onClick={() => navigate('/create-memory')}
+                  sx={{ 
+                    background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
+                    borderRadius: 3,
+                    px: 4,
+                    py: 1.5
+                  }}
+                >
+                  Create Memory
+                </Button>
               </Box>
             )}
           </Box>
         </Paper>
 
         {/* Memory Detail Dialog */}
-        <Dialog open={!!selectedMemory} onClose={handleCloseDialog} maxWidth="md" fullWidth PaperProps={{ sx: { borderRadius: 3, background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(10px)' } }}>
+        <Dialog open={!!selectedMemory} onClose={handleCloseDialog} maxWidth="md" fullWidth PaperProps={{ 
+          sx: { 
+            borderRadius: 4, 
+            background: 'rgba(255,255,255,0.95)', 
+            backdropFilter: 'blur(20px)',
+            boxShadow: '0 24px 64px rgba(0,0,0,0.12)'
+          } 
+        }}>
           {selectedMemory && (
-            <DialogContent>
-              <Grid container spacing={3}>
+            <DialogContent sx={{ p: { xs: 3, md: 4 } }}>
+              <Grid container spacing={{ xs: 2, md: 3 }}>
                 <Grid item xs={12} md={6}>
-                  <CardMedia component="img" height={{ xs: 200, md: 250 }} image={getImageUrl(selectedMemory)} alt={selectedMemory.title} sx={{ objectFit: 'cover', borderRadius: 2 }} />
+                  <CardMedia component="img" height={{ xs: 250, md: 300 }} image={getImageUrl(selectedMemory)} alt={selectedMemory.title} sx={{ objectFit: 'cover', borderRadius: 3 }} />
                 </Grid>
                 <Grid item xs={12} md={6}>
-                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
-                    <Typography variant="h4" sx={{ fontWeight: 700, color: '#2d3748', fontSize: { xs: '1.5rem', md: '2.125rem' } }}>{selectedMemory.title}</Typography>
-                    <Chip label={`Created by ${selectedMemory.creator === 'niki' ? 'Niki' : 'Amish'}`} sx={{ background: getCreatorColor(selectedMemory.creator), color: '#fff', fontWeight: 600 }} />
+                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
+                    <Typography variant="h4" sx={{ 
+                      fontWeight: 700, 
+                      color: '#2D3748', 
+                      fontSize: { xs: '1.5rem', md: '2.125rem' } 
+                    }}>
+                      {selectedMemory.title}
+                    </Typography>
+                    <Chip 
+                      label={`Created by ${selectedMemory.creator === 'niki' ? 'Niki' : 'Amish'}`} 
+                      sx={{ 
+                        background: getCreatorColor(selectedMemory.creator), 
+                        color: '#fff', 
+                        fontWeight: 600 
+                      }} 
+                    />
                   </Box>
-                  <Typography variant="body1" color="text.secondary" sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
-                    <CalendarToday sx={{ mr: 1, color: '#667eea' }} />
+                  <Typography variant="body1" color="text.secondary" sx={{ 
+                    mb: 2.5, 
+                    display: 'flex', 
+                    alignItems: 'center',
+                    fontSize: '1rem',
+                    color: '#718096'
+                  }}>
+                    <CalendarToday sx={{ mr: 1.5, color: '#FF6B6B' }} />
                     {new Date(selectedMemory.date).toLocaleDateString()}
                   </Typography>
                   {selectedMemory.location && (
-                    <Typography variant="body1" color="text.secondary" sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
-                      <LocationOn sx={{ mr: 1, color: '#667eea' }} />
+                    <Typography variant="body1" color="text.secondary" sx={{ 
+                      mb: 2.5, 
+                      display: 'flex', 
+                      alignItems: 'center',
+                      fontSize: '1rem',
+                      color: '#718096'
+                    }}>
+                      <LocationOn sx={{ mr: 1.5, color: '#FF6B6B' }} />
                       {selectedMemory.location}
                     </Typography>
                   )}
 
-                  <Box sx={{ mb: 3 }}>
-                    <Typography variant="h6" sx={{ fontWeight: 600, color: '#2d3748', mb: 1 }}>
+                  <Box sx={{ mb: 4 }}>
+                    <Typography variant="h6" sx={{ 
+                      fontWeight: 600, 
+                      color: '#2D3748', 
+                      mb: 2,
+                      fontSize: '1.25rem'
+                    }}>
                       Notes & Comments
                     </Typography>
                     {selectedMemory.notes ? (
-                      <Typography variant="body1" sx={{ color: '#2d3748', lineHeight: 1.6, mb: 2 }}>
+                      <Typography variant="body1" sx={{ 
+                        color: '#2D3748', 
+                        lineHeight: 1.7, 
+                        mb: 3,
+                        background: 'rgba(255,248,240,0.8)',
+                        p: 2,
+                        borderRadius: 2,
+                        border: '1px solid rgba(255,107,107,0.1)'
+                      }}>
                         {selectedMemory.notes}
                       </Typography>
                     ) : (
-                      <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                      <Typography variant="body2" color="text.secondary" sx={{ 
+                        mb: 3,
+                        color: '#718096',
+                        fontStyle: 'italic'
+                      }}>
                         No notes yet. Be the first to add one!
                       </Typography>
                     )}
 
-                    <Box sx={{ mt: 2 }}>
-                      <Typography variant="body2" sx={{ fontWeight: 600, color: '#2d3748', mb: 1 }}>
+                    <Box sx={{ mt: 3 }}>
+                      <Typography variant="body2" sx={{ 
+                        fontWeight: 600, 
+                        color: '#2D3748', 
+                        mb: 2,
+                        fontSize: '1rem'
+                      }}>
                         Add a note as {user?.name || 'User'}:
                       </Typography>
-                      <Box sx={{ display: 'flex', gap: 1 }}>
+                      <Box sx={{ display: 'flex', gap: 1.5 }}>
                         <TextField
                           fullWidth
                           size="small"
@@ -388,7 +577,7 @@ const Calendar = () => {
                             '& .MuiOutlinedInput-root': {
                               borderRadius: 2,
                               '& fieldset': {
-                                borderColor: 'rgba(102, 126, 234, 0.2)',
+                                borderColor: 'rgba(255,107,107,0.2)',
                               },
                             },
                           }}
@@ -398,11 +587,12 @@ const Calendar = () => {
                           onClick={handleAddNote}
                           disabled={!newNote.trim() || addingNote}
                           sx={{
-                            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                            background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
                             borderRadius: 2,
                             textTransform: 'none',
                             minWidth: 'auto',
-                            px: 2
+                            px: 2.5,
+                            py: 1.5
                           }}
                         >
                           {addingNote ? <CircularProgress size={20} /> : <Send />}
@@ -419,10 +609,12 @@ const Calendar = () => {
                       navigate('/gallery');
                     }}
                     sx={{
-                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                      borderRadius: 2,
+                      background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
+                      borderRadius: 3,
                       textTransform: 'none',
-                      mt: 2
+                      py: 1.5,
+                      fontSize: '1rem',
+                      fontWeight: 600
                     }}
                   >
                     View Full Memory in Gallery
