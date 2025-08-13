@@ -188,65 +188,13 @@ const Dashboard = () => {
       px: 2
     }}>
       <Container maxWidth="lg">
-        {/* Header Section */}
-        <Box sx={{
-          mb: { xs: 3, md: 5 },
-          textAlign: 'center',
-          background: 'rgba(30,41,59,0.8)',
-          borderRadius: 4,
-          p: { xs: 3, md: 4 },
-          backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(99,102,241,0.3)',
-          boxShadow: '0 16px 48px rgba(0,0,0,0.4)'
-        }}>
-          <Box sx={{
-            width: { xs: 60, md: 80 },
-            height: { xs: 60, md: 80 },
-            borderRadius: '50%',
-            background: getUserColor(selectedUser),
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            mx: 'auto',
-            mb: 3,
-            boxShadow: '0 8px 24px rgba(0,0,0,0.3)'
-          }}>
-            <Favorite sx={{ color: '#fff', fontSize: { xs: 20, md: 24 } }} />
-          </Box>
-          <Typography variant="h4" sx={{
-            fontWeight: 600,
-            color: '#F8FAFC',
-            fontSize: { xs: '1.5rem', md: '2rem' },
-            mb: 1
-          }}>
-            Hi, {selectedUser === 'niki' ? 'Niki' : 'Amish'}! 💕
-          </Typography>
-          <Typography variant="h3" component="h1" gutterBottom sx={{
-            fontWeight: 700,
-            background: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)',
-            backgroundClip: 'text',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            mb: 2,
-            fontSize: { xs: '1.75rem', md: '2.5rem' }
-          }}>
-            Niki & Amish's Date Journal
-          </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{
-            mb: 0,
-            fontWeight: 400,
-            fontSize: { xs: '1rem', md: '1.125rem' },
-            color: '#CBD5E1',
-            maxWidth: '600px',
-            mx: 'auto'
-          }}>
-            Document and cherish your special moments together
-          </Typography>
-        </Box>
-
         {/* Action Cards */}
-        <Grid container spacing={{ xs: 2, md: 3 }} sx={{ mb: 5 }}>
-          <Grid item xs={12} sm={6} md={4}>
+        <Grid container spacing={{ xs: 2, md: 3 }} sx={{ 
+          mb: 5, 
+          justifyContent: 'center',
+          alignItems: 'stretch'
+        }}>
+          <Grid item xs={12} sm={6} md={4} sx={{ display: 'flex' }}>
             <Card onClick={handleCreateMemory} sx={{
               background: 'linear-gradient(135deg, #1E293B 0%, #334155 100%)',
               borderRadius: 4,
@@ -254,6 +202,7 @@ const Dashboard = () => {
               cursor: 'pointer',
               transition: 'all 0.3s ease',
               height: '100%',
+              width: '100%',
               border: '1px solid rgba(99,102,241,0.2)',
               '&:hover': {
                 transform: 'translateY(-8px)',
@@ -261,7 +210,7 @@ const Dashboard = () => {
                 border: '1px solid rgba(99,102,241,0.4)'
               }
             }}>
-              <CardContent sx={{ textAlign: 'center', py: { xs: 3, md: 4 }, px: { xs: 2, md: 3 } }}>
+              <CardContent sx={{ textAlign: 'center', py: { xs: 3, md: 4 }, px: { xs: 2, md: 3 }, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <Box sx={{
                   width: { xs: 60, md: 80 },
                   height: { xs: 60, md: 80 },
@@ -293,7 +242,7 @@ const Dashboard = () => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={4} sx={{ display: 'flex' }}>
             <Card onClick={handleViewCalendar} sx={{
               background: 'linear-gradient(135deg, #1E293B 0%, #334155 100%)',
               borderRadius: 4,
@@ -301,6 +250,7 @@ const Dashboard = () => {
               cursor: 'pointer',
               transition: 'all 0.3s ease',
               height: '100%',
+              width: '100%',
               border: '1px solid rgba(139,92,246,0.2)',
               '&:hover': {
                 transform: 'translateY(-8px)',
@@ -308,7 +258,7 @@ const Dashboard = () => {
                 border: '1px solid rgba(139,92,246,0.4)'
               }
             }}>
-              <CardContent sx={{ textAlign: 'center', py: { xs: 3, md: 4 }, px: { xs: 2, md: 3 } }}>
+              <CardContent sx={{ textAlign: 'center', py: { xs: 3, md: 4 }, px: { xs: 2, md: 3 }, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <Box sx={{
                   width: { xs: 60, md: 80 },
                   height: { xs: 60, md: 80 },
@@ -340,7 +290,7 @@ const Dashboard = () => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={4} sx={{ display: 'flex' }}>
             <Card onClick={handleViewGallery} sx={{
               background: 'linear-gradient(135deg, #1E293B 0%, #334155 100%)',
               borderRadius: 4,
@@ -348,6 +298,7 @@ const Dashboard = () => {
               cursor: 'pointer',
               transition: 'all 0.3s ease',
               height: '100%',
+              width: '100%',
               border: '1px solid rgba(168,85,247,0.2)',
               '&:hover': {
                 transform: 'translateY(-8px)',
@@ -355,7 +306,7 @@ const Dashboard = () => {
                 border: '1px solid rgba(168,85,247,0.4)'
               }
             }}>
-              <CardContent sx={{ textAlign: 'center', py: { xs: 3, md: 4 }, px: { xs: 2, md: 3 } }}>
+              <CardContent sx={{ textAlign: 'center', py: { xs: 3, md: 4 }, px: { xs: 2, md: 3 }, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <Box sx={{
                   width: { xs: 60, md: 80 },
                   height: { xs: 60, md: 80 },

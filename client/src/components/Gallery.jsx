@@ -46,7 +46,6 @@ const Gallery = () => {
   const [selectedMemory, setSelectedMemory] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [viewMode, setViewMode] = useState('grid');
-  const [filter, setFilter] = useState('all');
   const [loading, setLoading] = useState(true);
   const [newNote, setNewNote] = useState('');
   const [addingNote, setAddingNote] = useState(false);
@@ -96,11 +95,8 @@ const Gallery = () => {
                           (memory.location && memory.location.toLowerCase().includes(searchTerm.toLowerCase())) ||
                           (memory.notes && memory.notes.toLowerCase().includes(searchTerm.toLowerCase()));
     
-    const matchesFilter = filter === 'all' || 
-                         (filter === 'niki' && memory.creator === 'niki') ||
-                         (filter === 'amish' && memory.creator === 'amish');
-    
-    return matchesSearch && matchesFilter;
+    // Just return all memories that match the search - no creator filtering
+    return matchesSearch;
   });
 
   const handleMemoryClick = (memory) => {
@@ -149,10 +145,6 @@ const Gallery = () => {
 
   const handleViewModeChange = (event, newValue) => {
     setViewMode(newValue);
-  };
-
-  const handleFilterChange = (event, newValue) => {
-    setFilter(newValue);
   };
 
   if (loading) {
@@ -237,26 +229,6 @@ const Gallery = () => {
                   justifyContent: { xs: 'center', md: 'flex-end' },
                   flexWrap: 'wrap'
                 }}>
-                  <Tabs
-                    value={filter}
-                    onChange={handleFilterChange}
-                    aria-label="memory filter"
-                    sx={{
-                      '& .MuiTab-root': {
-                        textTransform: 'none',
-                        fontWeight: 600,
-                        color: '#6366F1',
-                        fontSize: { xs: '0.875rem', md: '1rem' },
-                        minHeight: { xs: 40, md: 48 },
-                        '&.Mui-selected': { color: '#6366F1' }
-                      },
-                      '& .MuiTabs-indicator': { backgroundColor: '#6366F1' }
-                    }}
-                  >
-                    <Tab label="All" value="all" />
-                    <Tab label="Niki's" value="niki" />
-                    <Tab label="Amish's" value="amish" />
-                  </Tabs>
                   <Tabs
                     value={viewMode}
                     onChange={handleViewModeChange}

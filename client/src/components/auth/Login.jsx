@@ -10,7 +10,7 @@ import {
   Alert,
   CircularProgress
 } from '@mui/material';
-import { Favorite, Person } from '@mui/icons-material';
+import { Person } from '@mui/icons-material';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -36,12 +36,6 @@ const Login = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const getUserColor = (userType) => {
-    return userType === 'niki' 
-      ? 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)'
-      : 'linear-gradient(135deg, #4ECDC4 0%, #7EDDD6 100%)';
   };
 
   return (
@@ -81,7 +75,7 @@ const Login = () => {
               mb: 3,
               boxShadow: '0 16px 48px rgba(99,102,241,0.4)'
             }}>
-              <Favorite sx={{ fontSize: { xs: 40, md: 50 }, color: '#fff' }} />
+              <Person sx={{ fontSize: { xs: 40, md: 50 }, color: '#fff' }} />
             </Box>
             <Typography variant="h3" component="h1" gutterBottom sx={{
               fontWeight: 700,
@@ -89,7 +83,7 @@ const Login = () => {
               fontSize: { xs: '2rem', md: '2.5rem' },
               mb: 2
             }}>
-              Hi Niki!
+              Hi!
             </Typography>
             <Typography variant="h6" color="text.secondary" sx={{
               mb: 4,
