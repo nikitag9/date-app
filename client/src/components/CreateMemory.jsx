@@ -162,7 +162,7 @@ const CreateMemory = () => {
     return (
       <Box sx={{ 
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%)',
+        background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -177,10 +177,10 @@ const CreateMemory = () => {
               width: '100%',
               textAlign: 'center',
               borderRadius: 4,
-              background: 'rgba(255,255,255,0.9)',
+              background: 'rgba(30,41,59,0.9)',
               backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255,255,255,0.8)',
-              boxShadow: '0 16px 48px rgba(0,0,0,0.08)'
+              border: '1px solid rgba(99,102,241,0.3)',
+              boxShadow: '0 16px 48px rgba(0,0,0,0.4)'
             }}
           >
             <Box sx={{ mb: 4 }}>
@@ -188,19 +188,19 @@ const CreateMemory = () => {
                 width: { xs: 80, md: 100 },
                 height: { xs: 80, md: 100 },
                 borderRadius: '50%',
-                background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
+                background: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 mx: 'auto',
                 mb: 3,
-                boxShadow: '0 16px 48px rgba(255,107,107,0.3)'
+                boxShadow: '0 16px 48px rgba(99,102,241,0.4)'
               }}>
                 <Person sx={{ fontSize: { xs: 40, md: 50 }, color: '#fff' }} />
               </Box>
               <Typography variant="h4" component="h1" gutterBottom sx={{ 
                 fontWeight: 700, 
-                color: '#2D3748',
+                color: '#F8FAFC',
                 fontSize: { xs: '1.5rem', md: '2.125rem' }
               }}>
                 Who's Creating This Memory?
@@ -208,7 +208,7 @@ const CreateMemory = () => {
               <Typography variant="h6" color="text.secondary" sx={{ 
                 mb: 4,
                 fontSize: { xs: '1rem', md: '1.25rem' },
-                color: '#718096'
+                color: '#CBD5E1'
               }}>
                 Choose who you are to continue
               </Typography>
@@ -220,18 +220,18 @@ const CreateMemory = () => {
                 size="large"
                 onClick={() => handleUserSelect('niki')}
                 sx={{ 
-                  py: 3,
-                  background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
-                  borderRadius: 3,
-                  textTransform: 'none',
-                  fontSize: { xs: '1.1rem', md: '1.3rem' },
-                  fontWeight: 600,
-                  color: '#fff',
-                  boxShadow: '0 8px 32px rgba(255,107,107,0.3)',
-                  '&:hover': {
-                    background: 'linear-gradient(135deg, #E55555 0%, #FF6B6B 100%)',
-                    transform: 'translateY(-2px)',
-                    boxShadow: '0 12px 40px rgba(255,107,107,0.4)'
+                  py: 3, 
+                  background: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)', 
+                  borderRadius: 3, 
+                  textTransform: 'none', 
+                  fontSize: { xs: '1.1rem', md: '1.3rem' }, 
+                  fontWeight: 600, 
+                  color: '#fff', 
+                  boxShadow: '0 8px 32px rgba(99,102,241,0.4)',
+                  '&:hover': { 
+                    background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)', 
+                    transform: 'translateY(-2px)', 
+                    boxShadow: '0 12px 40px rgba(99,102,241,0.5)' 
                   }
                 }}
               >
@@ -244,18 +244,18 @@ const CreateMemory = () => {
                 size="large"
                 onClick={() => handleUserSelect('amish')}
                 sx={{ 
-                  py: 3,
-                  background: 'linear-gradient(135deg, #4ECDC4 0%, #7EDDD6 100%)',
-                  borderRadius: 3,
-                  textTransform: 'none',
-                  fontSize: { xs: '1.1rem', md: '1.3rem' },
-                  fontWeight: 600,
-                  color: '#fff',
-                  boxShadow: '0 8px 32px rgba(78,205,196,0.3)',
-                  '&:hover': {
-                    background: 'linear-gradient(135deg, #3BA89F 0%, #4ECDC4 100%)',
-                    transform: 'translateY(-2px)',
-                    boxShadow: '0 12px 40px rgba(78,205,196,0.4)'
+                  py: 3, 
+                  background: 'linear-gradient(135deg, #8B5CF6 0%, #A855F7 100%)', 
+                  borderRadius: 3, 
+                  textTransform: 'none', 
+                  fontSize: { xs: '1.1rem', md: '1.3rem' }, 
+                  fontWeight: 600, 
+                  color: '#fff', 
+                  boxShadow: '0 8px 32px rgba(139,92,246,0.4)',
+                  '&:hover': { 
+                    background: 'linear-gradient(135deg, #7C3AED 0%, #9333EA 100%)', 
+                    transform: 'translateY(-2px)', 
+                    boxShadow: '0 12px 40px rgba(139,92,246,0.5)' 
                   }
                 }}
               >
@@ -270,14 +270,14 @@ const CreateMemory = () => {
               sx={{ 
                 mt: 4,
                 borderRadius: 3,
-                borderColor: 'rgba(255,107,107,0.3)',
-                color: '#FF6B6B',
+                borderColor: 'rgba(99,102,241,0.3)',
+                color: '#6366F1',
                 borderWidth: 2,
                 px: 4,
                 py: 1.5,
                 '&:hover': {
-                  borderColor: '#FF6B6B',
-                  background: 'rgba(255,107,107,0.1)',
+                  borderColor: '#6366F1',
+                  background: 'rgba(99,102,241,0.1)',
                   transform: 'translateY(-1px)'
                 }
               }}
@@ -293,7 +293,7 @@ const CreateMemory = () => {
   return (
     <Box sx={{ 
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%)',
+      background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%)',
       py: { xs: 2, md: 3 },
       px: 2
     }}>
@@ -303,10 +303,10 @@ const CreateMemory = () => {
           sx={{ 
             p: { xs: 3, md: 4 },
             borderRadius: 4,
-            background: 'rgba(255,255,255,0.9)',
+            background: 'rgba(30,41,59,0.9)',
             backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255,255,255,0.8)',
-            boxShadow: '0 16px 48px rgba(0,0,0,0.08)'
+            border: '1px solid rgba(99,102,241,0.3)',
+            boxShadow: '0 16px 48px rgba(0,0,0,0.4)'
           }}
         >
           {/* Header */}
@@ -315,10 +315,10 @@ const CreateMemory = () => {
               onClick={() => navigate('/')} 
               sx={{ 
                 mr: 2,
-                background: 'rgba(255,107,107,0.1)',
-                color: '#FF6B6B',
+                background: 'rgba(99,102,241,0.1)',
+                color: '#6366F1',
                 '&:hover': {
-                  background: 'rgba(255,107,107,0.2)'
+                  background: 'rgba(99,102,241,0.2)'
                 }
               }}
             >
@@ -326,7 +326,7 @@ const CreateMemory = () => {
             </IconButton>
             <Typography variant="h4" component="h1" sx={{ 
               fontWeight: 700, 
-              color: '#2D3748',
+              color: '#F8FAFC',
               fontSize: { xs: '1.5rem', md: '2.125rem' }
             }}>
               Create New Memory
@@ -362,21 +362,21 @@ const CreateMemory = () => {
                   variant="outlined" 
                   required
                   InputProps={{ 
-                    startAdornment: (<InputAdornment position="start"><Add sx={{ color: '#FF6B6B' }} /></InputAdornment>) 
+                    startAdornment: (<InputAdornment position="start"><Add sx={{ color: '#6366F1' }} /></InputAdornment>) 
                   }} 
                   sx={{ 
                     '& .MuiOutlinedInput-root': { 
                       borderRadius: 3,
-                      background: 'rgba(255,255,255,0.8)',
+                      background: 'rgba(15,23,42,0.6)',
                       '& fieldset': { 
-                        borderColor: 'rgba(255,107,107,0.2)',
+                        borderColor: 'rgba(99,102,241,0.3)',
                         borderWidth: 2
                       }, 
                       '&:hover fieldset': { 
-                        borderColor: 'rgba(255,107,107,0.4)' 
+                        borderColor: 'rgba(99,102,241,0.5)' 
                       }, 
                       '&.Mui-focused fieldset': { 
-                        borderColor: '#FF6B6B' 
+                        borderColor: '#6366F1' 
                       } 
                     } 
                   }} 
@@ -394,21 +394,21 @@ const CreateMemory = () => {
                   required
                   InputLabelProps={{ shrink: true }} 
                   InputProps={{ 
-                    startAdornment: (<InputAdornment position="start"><CalendarToday sx={{ color: '#FF6B6B' }} /></InputAdornment>) 
+                    startAdornment: (<InputAdornment position="start"><CalendarToday sx={{ color: '#6366F1' }} /></InputAdornment>) 
                   }} 
                   sx={{ 
                     '& .MuiOutlinedInput-root': { 
                       borderRadius: 3,
-                      background: 'rgba(255,255,255,0.8)',
+                      background: 'rgba(15,23,42,0.6)',
                       '& fieldset': { 
-                        borderColor: 'rgba(255,107,107,0.2)',
+                        borderColor: 'rgba(99,102,241,0.3)',
                         borderWidth: 2
                       }, 
                       '&:hover fieldset': { 
-                        borderColor: 'rgba(255,107,107,0.4)' 
+                        borderColor: 'rgba(99,102,241,0.5)' 
                       }, 
                       '&.Mui-focused fieldset': { 
-                        borderColor: '#FF6B6B' 
+                        borderColor: '#6366F1' 
                       } 
                     } 
                   }} 
@@ -423,21 +423,21 @@ const CreateMemory = () => {
                   onChange={handleInputChange} 
                   variant="outlined" 
                   InputProps={{ 
-                    startAdornment: (<InputAdornment position="start"><LocationOn sx={{ color: '#FF6B6B' }} /></InputAdornment>) 
+                    startAdornment: (<InputAdornment position="start"><LocationOn sx={{ color: '#6366F1' }} /></InputAdornment>) 
                   }} 
                   sx={{ 
                     '& .MuiOutlinedInput-root': { 
                       borderRadius: 3,
-                      background: 'rgba(255,255,255,0.8)',
+                      background: 'rgba(15,23,42,0.6)',
                       '& fieldset': { 
-                        borderColor: 'rgba(255,107,107,0.2)',
+                        borderColor: 'rgba(99,102,241,0.3)',
                         borderWidth: 2
                       }, 
                       '&:hover fieldset': { 
-                        borderColor: 'rgba(255,107,107,0.4)' 
+                        borderColor: 'rgba(99,102,241,0.5)' 
                       }, 
                       '&.Mui-focused fieldset': { 
-                        borderColor: '#FF6B6B' 
+                        borderColor: '#6366F1' 
                       } 
                     } 
                   }} 
@@ -456,16 +456,16 @@ const CreateMemory = () => {
                   sx={{ 
                     '& .MuiOutlinedInput-root': { 
                       borderRadius: 3,
-                      background: 'rgba(255,255,255,0.8)',
+                      background: 'rgba(15,23,42,0.6)',
                       '& fieldset': { 
-                        borderColor: 'rgba(255,107,107,0.2)',
+                        borderColor: 'rgba(99,102,241,0.3)',
                         borderWidth: 2
                       }, 
                       '&:hover fieldset': { 
-                        borderColor: 'rgba(255,107,107,0.4)' 
+                        borderColor: 'rgba(99,102,241,0.5)' 
                       }, 
                       '&.Mui-focused fieldset': { 
-                        borderColor: '#FF6B6B' 
+                        borderColor: '#6366F1' 
                       } 
                     } 
                   }} 
@@ -479,14 +479,14 @@ const CreateMemory = () => {
                   sx={{ 
                     py: 2, 
                     borderRadius: 3, 
-                    borderColor: 'rgba(255,107,107,0.3)', 
+                    borderColor: 'rgba(99,102,241,0.3)', 
                     borderWidth: 2,
-                    color: '#FF6B6B', 
+                    color: '#6366F1', 
                     fontSize: '1rem',
                     fontWeight: 600,
                     '&:hover': { 
-                      borderColor: '#FF6B6B', 
-                      background: 'rgba(255,107,107,0.1)',
+                      borderColor: '#6366F1', 
+                      background: 'rgba(99,102,241,0.1)',
                       transform: 'translateY(-1px)'
                     } 
                   }}
@@ -501,11 +501,13 @@ const CreateMemory = () => {
                         position: 'relative', 
                         borderRadius: 3, 
                         overflow: 'hidden',
-                        boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
+                        boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
                         transition: 'all 0.3s ease',
+                        background: 'rgba(30,41,59,0.8)',
+                        border: '1px solid rgba(99,102,241,0.2)',
                         '&:hover': {
                           transform: 'scale(1.02)',
-                          boxShadow: '0 12px 32px rgba(0,0,0,0.15)'
+                          boxShadow: '0 12px 32px rgba(0,0,0,0.4)'
                         }
                       }}>
                         <CardMedia component="img" height="160" image={image.preview} alt={image.name} sx={{ objectFit: 'cover' }} />
@@ -515,10 +517,10 @@ const CreateMemory = () => {
                             position: 'absolute', 
                             top: 8, 
                             right: 8, 
-                            background: 'rgba(255,255,255,0.9)', 
-                            color: '#FF6B6B',
+                            background: 'rgba(30,41,59,0.9)', 
+                            color: '#6366F1',
                             '&:hover': { 
-                              background: '#FF6B6B',
+                              background: '#6366F1',
                               color: '#fff'
                             } 
                           }}
@@ -538,21 +540,21 @@ const CreateMemory = () => {
                   size="large" 
                   disabled={uploading || !formData.title || !formData.date || formData.images.length === 0} 
                   sx={{ 
-                    background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
+                    background: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)',
                     borderRadius: 3, 
                     textTransform: 'none',
                     py: 2,
                     fontSize: '1.1rem',
                     fontWeight: 600,
-                    boxShadow: '0 8px 24px rgba(255,107,107,0.3)',
+                    boxShadow: '0 8px 24px rgba(99,102,241,0.4)',
                     '&:hover': {
-                      background: 'linear-gradient(135deg, #E55555 0%, #FF6B6B 100%)',
+                      background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
                       transform: 'translateY(-2px)',
-                      boxShadow: '0 12px 32px rgba(255,107,107,0.4)'
+                      boxShadow: '0 12px 32px rgba(99,102,241,0.5)'
                     },
                     '&:disabled': {
-                      background: '#E2E8F0',
-                      color: '#A0AEC0',
+                      background: '#475569',
+                      color: '#64748B',
                       transform: 'none',
                       boxShadow: 'none'
                     }
