@@ -4,6 +4,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 
+import PasscodeScreen from './components/auth/PasscodeScreen';
 import Login from './components/auth/Login';
 import Dashboard from './components/Dashboard';
 import CreateMemory from './components/CreateMemory';
@@ -13,63 +14,68 @@ import Navbar from './components/Navbar';
 
 const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
-      main: '#FF6B6B', // Warm coral red
-      light: '#FF8E8E',
-      dark: '#E55555',
+      main: '#6366F1', // Indigo purple
+      light: '#818CF8',
+      dark: '#4F46E5',
     },
     secondary: {
-      main: '#4ECDC4', // Soft teal
-      light: '#7EDDD6',
-      dark: '#3BA89F',
+      main: '#8B5CF6', // Purple
+      light: '#A78BFA',
+      dark: '#7C3AED',
     },
     background: {
-      default: '#FFF8F0', // Warm cream
-      paper: '#FFFFFF',
+      default: '#0F172A', // Dark blue
+      paper: '#1E293B', // Lighter dark blue
+    },
+    surface: {
+      main: '#334155', // Medium dark blue
+      light: '#475569',
     },
     text: {
-      primary: '#2D3748',
-      secondary: '#718096',
+      primary: '#F8FAFC', // Light gray
+      secondary: '#CBD5E1', // Medium gray
     },
     success: {
-      main: '#68D391', // Soft green
+      main: '#10B981', // Green
     },
     warning: {
-      main: '#F6AD55', // Warm orange
+      main: '#F59E0B', // Amber
     },
     error: {
-      main: '#FC8181', // Soft red
+      main: '#EF4444', // Red
     },
   },
   typography: {
     fontFamily: '"Inter", "Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
-    h1: { 
-      fontWeight: 700, 
+    h1: {
+      fontWeight: 700,
       fontSize: '2.5rem',
       lineHeight: 1.2,
     },
-    h2: { 
-      fontWeight: 600, 
+    h2: {
+      fontWeight: 600,
       fontSize: '2rem',
       lineHeight: 1.3,
     },
-    h3: { 
-      fontWeight: 600, 
+    h3: {
+      fontWeight: 600,
       fontSize: '1.75rem',
       lineHeight: 1.3,
     },
-    h4: { 
-      fontWeight: 600, 
+    h4: {
+      fontWeight: 600,
       fontSize: '1.5rem',
       lineHeight: 1.4,
     },
-    h5: { 
-      fontWeight: 600, 
+    h5: {
+      fontWeight: 600,
       fontSize: '1.25rem',
       lineHeight: 1.4,
     },
-    h6: { 
-      fontWeight: 600, 
+    h6: {
+      fontWeight: 600,
       fontSize: '1.125rem',
       lineHeight: 1.4,
     },
@@ -95,17 +101,17 @@ const theme = createTheme({
           fontWeight: 600,
           fontSize: '1rem',
           padding: '12px 24px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
           transition: 'all 0.3s ease',
           '&:hover': {
             transform: 'translateY(-2px)',
-            boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
+            boxShadow: '0 8px 20px rgba(0,0,0,0.4)',
           },
         },
         contained: {
-          background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
+          background: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)',
           '&:hover': {
-            background: 'linear-gradient(135deg, #E55555 0%, #FF6B6B 100%)',
+            background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
           },
         },
         outlined: {
@@ -120,8 +126,8 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 20,
-          boxShadow: '0 8px 32px rgba(0,0,0,0.08)',
-          border: '1px solid rgba(255,255,255,0.8)',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+          border: '1px solid rgba(99,102,241,0.2)',
           backdropFilter: 'blur(20px)',
           transition: 'all 0.3s ease',
         },
@@ -132,16 +138,16 @@ const theme = createTheme({
         root: {
           '& .MuiOutlinedInput-root': {
             borderRadius: 12,
-            backgroundColor: 'rgba(255,255,255,0.8)',
+            backgroundColor: 'rgba(30,41,59,0.8)',
             '& fieldset': {
-              borderColor: 'rgba(255,107,107,0.2)',
+              borderColor: 'rgba(99,102,241,0.3)',
               borderWidth: 2,
             },
             '&:hover fieldset': {
-              borderColor: 'rgba(255,107,107,0.4)',
+              borderColor: 'rgba(99,102,241,0.5)',
             },
             '&.Mui-focused fieldset': {
-              borderColor: '#FF6B6B',
+              borderColor: '#6366F1',
               borderWidth: 2,
             },
           },
@@ -161,7 +167,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 24,
-          boxShadow: '0 16px 48px rgba(0,0,0,0.08)',
+          boxShadow: '0 16px 48px rgba(0,0,0,0.3)',
         },
       },
     },
@@ -171,7 +177,7 @@ const theme = createTheme({
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
   if (loading) { return <div>Loading...</div>; }
-  return isAuthenticated ? children : <Navigate to="/login" />;
+  return isAuthenticated ? children : <Navigate to="/passcode" />;
 };
 
 function App() {
@@ -181,13 +187,13 @@ function App() {
       <AuthProvider>
         <Router>
           <div className="App">
-            <Navbar />
             <Routes>
+              <Route path="/passcode" element={<PasscodeScreen />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-              <Route path="/create-memory" element={<PrivateRoute><CreateMemory /></PrivateRoute>} />
-              <Route path="/calendar" element={<PrivateRoute><Calendar /></PrivateRoute>} />
-              <Route path="/gallery" element={<PrivateRoute><Gallery /></PrivateRoute>} />
+              <Route path="/" element={<PrivateRoute><><Navbar /><Dashboard /></></PrivateRoute>} />
+              <Route path="/create-memory" element={<PrivateRoute><><Navbar /><CreateMemory /></></PrivateRoute>} />
+              <Route path="/calendar" element={<PrivateRoute><><Navbar /><Calendar /></></PrivateRoute>} />
+              <Route path="/gallery" element={<PrivateRoute><><Navbar /><Gallery /></></PrivateRoute>} />
             </Routes>
           </div>
         </Router>

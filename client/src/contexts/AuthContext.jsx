@@ -14,55 +14,53 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passcodeVerified, setPasscodeVerified] = useState(false);
   const [loading, setLoading] = useState(true);
 
   // Set up axios defaults
   axios.defaults.baseURL = 'http://localhost:5001/api';
 
   useEffect(() => {
-    const userData = localStorage.getItem('user');
+    // Check for existing user session
+    const savedUser = localStorage.getItem('user');
+    const savedPasscodeVerified = localStorage.getItem('passcodeVerified');
     
-    if (userData) {
-      const user = JSON.parse(userData);
-      setUser(user);
+    if (savedUser && savedPasscodeVerified === 'true') {
+      setUser(JSON.parse(savedUser));
       setIsAuthenticated(true);
+      setPasscodeVerified(true);
     }
+    
     setLoading(false);
   }, []);
 
-  const login = async (userType) => {
+  const login = async (userData) => {
     try {
-      // Create user data based on selection
-      const userData = {
-        id: userType,
-        name: userType === 'niki' ? 'Niki' : 'Amish',
-        type: userType
-      };
-      
       // Store user data
-      localStorage.setItem('user', JSON.stringify(userData));
-      
       setUser(userData);
       setIsAuthenticated(true);
-      
+      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('passcodeVerified', 'true');
       return { success: true };
     } catch (error) {
-      return { 
-        success: false, 
-        message: 'Login failed' 
-      };
+      console.error('Login error:', error);
+      return { success: false, message: 'Login failed' };
     }
   };
 
   const logout = () => {
-    localStorage.removeItem('user');
     setUser(null);
     setIsAuthenticated(false);
+    setPasscodeVerified(false);
+    localStorage.removeItem('user');
+    localStorage.removeItem('passcodeVerified');
   };
 
   const value = {
     user,
     isAuthenticated,
+    passcodeVerified,
+    setPasscodeVerified,
     loading,
     login,
     logout

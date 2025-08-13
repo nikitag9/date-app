@@ -7,30 +7,48 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     const memories = await Memory.find().sort({ date: -1 });
+    console.log('Fetched memories:', memories.length);
     res.json(memories);
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    console.error('Error fetching memories:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
 
 // Create a new memory
 router.post('/', async (req, res) => {
   try {
+    console.log('Creating memory with data:', req.body);
     const { title, date, location, notes, images, creator } = req.body;
+
+    // Validate required fields
+    if (!title || !date || !creator) {
+      return res.status(400).json({ 
+        message: 'Missing required fields: title, date, and creator are required' 
+      });
+    }
 
     const memory = new Memory({
       title,
-      date,
-      location,
-      notes,
-      images,
+      date: new Date(date),
+      location: location || '',
+      notes: notes || '',
+      images: images || [],
       creator
     });
 
-    await memory.save();
-    res.status(201).json(memory);
+    console.log('Memory object created:', memory);
+    const savedMemory = await memory.save();
+    console.log('Memory saved successfully:', savedMemory._id);
+    
+    res.status(201).json(savedMemory);
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    console.error('Error creating memory:', error);
+    res.status(500).json({ 
+      message: 'Server error', 
+      error: error.message,
+      details: error.errors || 'Unknown error'
+    });
   }
 });
 
@@ -43,7 +61,8 @@ router.get('/:id', async (req, res) => {
     }
     res.json(memory);
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    console.error('Error fetching memory:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
 
@@ -64,7 +83,8 @@ router.put('/:id', async (req, res) => {
     
     res.json(memory);
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    console.error('Error updating memory:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
 
@@ -77,7 +97,8 @@ router.delete('/:id', async (req, res) => {
     }
     res.json({ message: 'Memory deleted' });
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    console.error('Error deleting memory:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
 
