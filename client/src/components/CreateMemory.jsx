@@ -153,8 +153,8 @@ const CreateMemory = () => {
 
   const getUserColor = (userType) => {
     return userType === 'niki' 
-      ? 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)'
-      : 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)';
+      ? 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)'
+      : 'linear-gradient(135deg, #4ECDC4 0%, #7EDDD6 100%)';
   };
 
   // User Selection Dialog
@@ -162,68 +162,80 @@ const CreateMemory = () => {
     return (
       <Box sx={{ 
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%)',
+        background: 'linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        py: 4
+        py: 4,
+        px: 2
       }}>
         <Container maxWidth="sm">
           <Paper
             elevation={0}
             sx={{
-              p: 4,
+              p: { xs: 3, md: 4 },
               width: '100%',
               textAlign: 'center',
               borderRadius: 4,
               background: 'rgba(255,255,255,0.9)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255,255,255,0.2)'
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255,255,255,0.8)',
+              boxShadow: '0 16px 48px rgba(0,0,0,0.08)'
             }}
           >
             <Box sx={{ mb: 4 }}>
               <Box sx={{
-                width: 100,
-                height: 100,
+                width: { xs: 80, md: 100 },
+                height: { xs: 80, md: 100 },
                 borderRadius: '50%',
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 mx: 'auto',
-                mb: 3
+                mb: 3,
+                boxShadow: '0 16px 48px rgba(255,107,107,0.3)'
               }}>
-                <Person sx={{ fontSize: 50, color: '#fff' }} />
+                <Person sx={{ fontSize: { xs: 40, md: 50 }, color: '#fff' }} />
               </Box>
-              <Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: 700, color: '#2d3748' }}>
+              <Typography variant="h4" component="h1" gutterBottom sx={{ 
+                fontWeight: 700, 
+                color: '#2D3748',
+                fontSize: { xs: '1.5rem', md: '2.125rem' }
+              }}>
                 Who's Creating This Memory?
               </Typography>
-              <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
+              <Typography variant="h6" color="text.secondary" sx={{ 
+                mb: 4,
+                fontSize: { xs: '1rem', md: '1.25rem' },
+                color: '#718096'
+              }}>
                 Choose who you are to continue
               </Typography>
             </Box>
 
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
               <Button
                 variant="contained"
                 size="large"
                 onClick={() => handleUserSelect('niki')}
                 sx={{ 
                   py: 3,
-                  background: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
+                  background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
                   borderRadius: 3,
                   textTransform: 'none',
-                  fontSize: '1.3rem',
+                  fontSize: { xs: '1.1rem', md: '1.3rem' },
                   fontWeight: 600,
                   color: '#fff',
+                  boxShadow: '0 8px 32px rgba(255,107,107,0.3)',
                   '&:hover': {
-                    background: 'linear-gradient(135deg, #ff8a8e 0%, #febfef 100%)',
+                    background: 'linear-gradient(135deg, #E55555 0%, #FF6B6B 100%)',
                     transform: 'translateY(-2px)',
-                    boxShadow: '0 8px 25px rgba(255, 154, 158, 0.3)'
+                    boxShadow: '0 12px 40px rgba(255,107,107,0.4)'
                   }
                 }}
               >
-                <Person sx={{ mr: 2, fontSize: 28 }} />
+                <Person sx={{ mr: 2, fontSize: { xs: 24, md: 28 } }} />
                 I'm Niki
               </Button>
 
@@ -233,20 +245,21 @@ const CreateMemory = () => {
                 onClick={() => handleUserSelect('amish')}
                 sx={{ 
                   py: 3,
-                  background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+                  background: 'linear-gradient(135deg, #4ECDC4 0%, #7EDDD6 100%)',
                   borderRadius: 3,
                   textTransform: 'none',
-                  fontSize: '1.3rem',
+                  fontSize: { xs: '1.1rem', md: '1.3rem' },
                   fontWeight: 600,
                   color: '#fff',
+                  boxShadow: '0 8px 32px rgba(78,205,196,0.3)',
                   '&:hover': {
-                    background: 'linear-gradient(135deg, #98dde0 0%, #fec6e3 100%)',
+                    background: 'linear-gradient(135deg, #3BA89F 0%, #4ECDC4 100%)',
                     transform: 'translateY(-2px)',
-                    boxShadow: '0 8px 25px rgba(168, 237, 234, 0.3)'
+                    boxShadow: '0 12px 40px rgba(78,205,196,0.4)'
                   }
                 }}
               >
-                <Person sx={{ mr: 2, fontSize: 28 }} />
+                <Person sx={{ mr: 2, fontSize: { xs: 24, md: 28 } }} />
                 I'm Amish
               </Button>
             </Box>
@@ -255,13 +268,17 @@ const CreateMemory = () => {
               variant="outlined"
               onClick={() => navigate('/')}
               sx={{ 
-                mt: 3,
-                borderRadius: 2,
-                borderColor: 'rgba(102, 126, 234, 0.3)',
-                color: '#667eea',
+                mt: 4,
+                borderRadius: 3,
+                borderColor: 'rgba(255,107,107,0.3)',
+                color: '#FF6B6B',
+                borderWidth: 2,
+                px: 4,
+                py: 1.5,
                 '&:hover': {
-                  borderColor: '#667eea',
-                  background: 'rgba(102, 126, 234, 0.1)'
+                  borderColor: '#FF6B6B',
+                  background: 'rgba(255,107,107,0.1)',
+                  transform: 'translateY(-1px)'
                 }
               }}
             >
@@ -276,35 +293,42 @@ const CreateMemory = () => {
   return (
     <Box sx={{ 
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%)',
-      py: 3
+      background: 'linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%)',
+      py: { xs: 2, md: 3 },
+      px: 2
     }}>
       <Container maxWidth="md">
         <Paper 
           elevation={0}
           sx={{ 
-            p: 4,
+            p: { xs: 3, md: 4 },
             borderRadius: 4,
-            background: 'rgba(255,255,255,0.8)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255,255,255,0.2)'
+            background: 'rgba(255,255,255,0.9)',
+            backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255,255,255,0.8)',
+            boxShadow: '0 16px 48px rgba(0,0,0,0.08)'
           }}
         >
           {/* Header */}
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 3, md: 4 } }}>
             <IconButton 
               onClick={() => navigate('/')} 
               sx={{ 
                 mr: 2,
-                background: 'rgba(102, 126, 234, 0.1)',
+                background: 'rgba(255,107,107,0.1)',
+                color: '#FF6B6B',
                 '&:hover': {
-                  background: 'rgba(102, 126, 234, 0.2)'
+                  background: 'rgba(255,107,107,0.2)'
                 }
               }}
             >
               <ArrowBack />
             </IconButton>
-            <Typography variant="h4" component="h1" sx={{ fontWeight: 700, color: '#2d3748' }}>
+            <Typography variant="h4" component="h1" sx={{ 
+              fontWeight: 700, 
+              color: '#2D3748',
+              fontSize: { xs: '1.5rem', md: '2.125rem' }
+            }}>
               Create New Memory
             </Typography>
             <Box sx={{ ml: 'auto' }}>
@@ -313,20 +337,21 @@ const CreateMemory = () => {
                 sx={{
                   background: getUserColor(selectedUser),
                   color: '#fff',
-                  fontWeight: 600
+                  fontWeight: 600,
+                  fontSize: '0.875rem'
                 }}
               />
             </Box>
           </Box>
 
           {error && (
-            <Alert severity="error" sx={{ mb: 3, borderRadius: 2 }}>
+            <Alert severity="error" sx={{ mb: 3, borderRadius: 3 }}>
               {error}
             </Alert>
           )}
 
           <Box component="form" onSubmit={handleSubmit}>
-            <Grid container spacing={3}>
+            <Grid container spacing={{ xs: 2, md: 3 }}>
               <Grid item xs={12}>
                 <TextField 
                   fullWidth 
@@ -336,8 +361,25 @@ const CreateMemory = () => {
                   onChange={handleInputChange} 
                   variant="outlined" 
                   required
-                  InputProps={{ startAdornment: (<InputAdornment position="start"><Add sx={{ color: '#667eea' }} /></InputAdornment>) }} 
-                  sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2, '& fieldset': { borderColor: 'rgba(102, 126, 234, 0.2)' }, '&:hover fieldset': { borderColor: 'rgba(102, 126, 234, 0.4)' }, '&.Mui-focused fieldset': { borderColor: '#667eea' } } }} 
+                  InputProps={{ 
+                    startAdornment: (<InputAdornment position="start"><Add sx={{ color: '#FF6B6B' }} /></InputAdornment>) 
+                  }} 
+                  sx={{ 
+                    '& .MuiOutlinedInput-root': { 
+                      borderRadius: 3,
+                      background: 'rgba(255,255,255,0.8)',
+                      '& fieldset': { 
+                        borderColor: 'rgba(255,107,107,0.2)',
+                        borderWidth: 2
+                      }, 
+                      '&:hover fieldset': { 
+                        borderColor: 'rgba(255,107,107,0.4)' 
+                      }, 
+                      '&.Mui-focused fieldset': { 
+                        borderColor: '#FF6B6B' 
+                      } 
+                    } 
+                  }} 
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -351,8 +393,25 @@ const CreateMemory = () => {
                   variant="outlined" 
                   required
                   InputLabelProps={{ shrink: true }} 
-                  InputProps={{ startAdornment: (<InputAdornment position="start"><CalendarToday sx={{ color: '#667eea' }} /></InputAdornment>) }} 
-                  sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2, '& fieldset': { borderColor: 'rgba(102, 126, 234, 0.2)' }, '&:hover fieldset': { borderColor: 'rgba(102, 126, 234, 0.4)' }, '&.Mui-focused fieldset': { borderColor: '#667eea' } } }} 
+                  InputProps={{ 
+                    startAdornment: (<InputAdornment position="start"><CalendarToday sx={{ color: '#FF6B6B' }} /></InputAdornment>) 
+                  }} 
+                  sx={{ 
+                    '& .MuiOutlinedInput-root': { 
+                      borderRadius: 3,
+                      background: 'rgba(255,255,255,0.8)',
+                      '& fieldset': { 
+                        borderColor: 'rgba(255,107,107,0.2)',
+                        borderWidth: 2
+                      }, 
+                      '&:hover fieldset': { 
+                        borderColor: 'rgba(255,107,107,0.4)' 
+                      }, 
+                      '&.Mui-focused fieldset': { 
+                        borderColor: '#FF6B6B' 
+                      } 
+                    } 
+                  }} 
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -363,8 +422,25 @@ const CreateMemory = () => {
                   value={formData.location} 
                   onChange={handleInputChange} 
                   variant="outlined" 
-                  InputProps={{ startAdornment: (<InputAdornment position="start"><LocationOn sx={{ color: '#667eea' }} /></InputAdornment>) }} 
-                  sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2, '& fieldset': { borderColor: 'rgba(102, 126, 234, 0.2)' }, '&:hover fieldset': { borderColor: 'rgba(102, 126, 234, 0.4)' }, '&.Mui-focused fieldset': { borderColor: '#667eea' } } }} 
+                  InputProps={{ 
+                    startAdornment: (<InputAdornment position="start"><LocationOn sx={{ color: '#FF6B6B' }} /></InputAdornment>) 
+                  }} 
+                  sx={{ 
+                    '& .MuiOutlinedInput-root': { 
+                      borderRadius: 3,
+                      background: 'rgba(255,255,255,0.8)',
+                      '& fieldset': { 
+                        borderColor: 'rgba(255,107,107,0.2)',
+                        borderWidth: 2
+                      }, 
+                      '&:hover fieldset': { 
+                        borderColor: 'rgba(255,107,107,0.4)' 
+                      }, 
+                      '&.Mui-focused fieldset': { 
+                        borderColor: '#FF6B6B' 
+                      } 
+                    } 
+                  }} 
                 />
               </Grid>
               <Grid item xs={12}>
@@ -377,7 +453,22 @@ const CreateMemory = () => {
                   value={formData.notes} 
                   onChange={handleInputChange} 
                   variant="outlined" 
-                  sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2, '& fieldset': { borderColor: 'rgba(102, 126, 234, 0.2)' }, '&:hover fieldset': { borderColor: 'rgba(102, 126, 234, 0.4)' }, '&.Mui-focused fieldset': { borderColor: '#667eea' } } }} 
+                  sx={{ 
+                    '& .MuiOutlinedInput-root': { 
+                      borderRadius: 3,
+                      background: 'rgba(255,255,255,0.8)',
+                      '& fieldset': { 
+                        borderColor: 'rgba(255,107,107,0.2)',
+                        borderWidth: 2
+                      }, 
+                      '&:hover fieldset': { 
+                        borderColor: 'rgba(255,107,107,0.4)' 
+                      }, 
+                      '&.Mui-focused fieldset': { 
+                        borderColor: '#FF6B6B' 
+                      } 
+                    } 
+                  }} 
                 />
               </Grid>
               <Grid item xs={12}>
@@ -385,18 +476,54 @@ const CreateMemory = () => {
                   variant="outlined" 
                   component="label" 
                   fullWidth 
-                  sx={{ py: 1.5, borderRadius: 2, borderColor: 'rgba(102, 126, 234, 0.3)', color: '#667eea', '&:hover': { borderColor: '#667eea', background: 'rgba(102, 126, 234, 0.1)' } }}
+                  sx={{ 
+                    py: 2, 
+                    borderRadius: 3, 
+                    borderColor: 'rgba(255,107,107,0.3)', 
+                    borderWidth: 2,
+                    color: '#FF6B6B', 
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                    '&:hover': { 
+                      borderColor: '#FF6B6B', 
+                      background: 'rgba(255,107,107,0.1)',
+                      transform: 'translateY(-1px)'
+                    } 
+                  }}
                 >
-                  <Image sx={{ mr: 1 }} /> Upload Image *
+                  <Image sx={{ mr: 1.5, fontSize: 20 }} /> Upload Image *
                   <input type="file" hidden onChange={handleImageUpload} accept="image/*" required />
                 </Button>
                 {formData.images.length > 0 && (
-                  <Box sx={{ mt: 2, display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+                  <Box sx={{ mt: 3, display: 'flex', flexWrap: 'wrap', gap: 2 }}>
                     {formData.images.map((image, index) => (
-                      <Card key={index} sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden' }}>
-                        <CardMedia component="img" height="150" image={image.preview} alt={image.name} sx={{ objectFit: 'cover' }} />
-                        <IconButton onClick={() => removeImage(index)} sx={{ position: 'absolute', top: 4, right: 4, background: 'rgba(0,0,0,0.5)', color: '#fff', '&:hover': { background: 'rgba(0,0,0,0.7)' } }}>
-                          <Delete color="error" />
+                      <Card key={index} sx={{ 
+                        position: 'relative', 
+                        borderRadius: 3, 
+                        overflow: 'hidden',
+                        boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
+                        transition: 'all 0.3s ease',
+                        '&:hover': {
+                          transform: 'scale(1.02)',
+                          boxShadow: '0 12px 32px rgba(0,0,0,0.15)'
+                        }
+                      }}>
+                        <CardMedia component="img" height="160" image={image.preview} alt={image.name} sx={{ objectFit: 'cover' }} />
+                        <IconButton 
+                          onClick={() => removeImage(index)} 
+                          sx={{ 
+                            position: 'absolute', 
+                            top: 8, 
+                            right: 8, 
+                            background: 'rgba(255,255,255,0.9)', 
+                            color: '#FF6B6B',
+                            '&:hover': { 
+                              background: '#FF6B6B',
+                              color: '#fff'
+                            } 
+                          }}
+                        >
+                          <Delete />
                         </IconButton>
                       </Card>
                     ))}
@@ -410,9 +537,28 @@ const CreateMemory = () => {
                   variant="contained" 
                   size="large" 
                   disabled={uploading || !formData.title || !formData.date || formData.images.length === 0} 
-                  sx={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', borderRadius: 2, textTransform: 'none' }}
+                  sx={{ 
+                    background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
+                    borderRadius: 3, 
+                    textTransform: 'none',
+                    py: 2,
+                    fontSize: '1.1rem',
+                    fontWeight: 600,
+                    boxShadow: '0 8px 24px rgba(255,107,107,0.3)',
+                    '&:hover': {
+                      background: 'linear-gradient(135deg, #E55555 0%, #FF6B6B 100%)',
+                      transform: 'translateY(-2px)',
+                      boxShadow: '0 12px 32px rgba(255,107,107,0.4)'
+                    },
+                    '&:disabled': {
+                      background: '#E2E8F0',
+                      color: '#A0AEC0',
+                      transform: 'none',
+                      boxShadow: 'none'
+                    }
+                  }}
                 >
-                  {uploading ? <CircularProgress size={24} /> : 'Save Memory'}
+                  {uploading ? <CircularProgress size={24} sx={{ color: '#fff' }} /> : 'Save Memory'}
                 </Button>
               </Grid>
             </Grid>
