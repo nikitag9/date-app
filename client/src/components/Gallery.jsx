@@ -49,6 +49,7 @@ const Gallery = () => {
   const [loading, setLoading] = useState(true);
   const [newNote, setNewNote] = useState('');
   const [addingNote, setAddingNote] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchMemories();
@@ -61,9 +62,14 @@ const Gallery = () => {
       if (response.ok) {
         const data = await response.json();
         setMemories(data);
+        console.log('Memories fetched successfully:', data);
+      } else {
+        console.error('Failed to fetch memories:', response.status, response.statusText);
+        setError('Failed to load memories. Please check if the backend server is running.');
       }
     } catch (error) {
       console.error('Error fetching memories:', error);
+      setError('Cannot connect to server. Please ensure the backend server is running on port 5001.');
     } finally {
       setLoading(false);
     }
@@ -184,7 +190,7 @@ const Gallery = () => {
               color: '#6366F1',
               '&:hover': { background: 'rgba(99,102,241,0.2)' }
             }}>
-              <ArrowBack />
+              <ArrowBack sx={{ fontSize: { xs: 20, md: 24 } }} />
             </IconButton>
             <Typography variant="h4" component="h1" sx={{
               fontWeight: 700,
@@ -250,6 +256,12 @@ const Gallery = () => {
               </Grid>
             </Grid>
           </Box>
+
+          {error && (
+            <Alert severity="error" sx={{ mb: 3, borderRadius: 3 }}>
+              {error}
+            </Alert>
+          )}
 
           {filteredMemories.length > 0 ? (
             viewMode === 'grid' ? (

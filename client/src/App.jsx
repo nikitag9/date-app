@@ -175,19 +175,24 @@ const theme = createTheme({
 });
 
 const PrivateRoute = ({ children }) => {
-  const { isAuthenticated, loading } = useAuth();
+  const { isAuthenticated, passcodeVerified, loading } = useAuth();
   
   // Add debugging
-  console.log('PrivateRoute - isAuthenticated:', isAuthenticated, 'loading:', loading);
+  console.log('PrivateRoute - isAuthenticated:', isAuthenticated, 'passcodeVerified:', passcodeVerified, 'loading:', loading);
   
   if (loading) { 
     console.log('PrivateRoute - Still loading...');
     return <div>Loading...</div>; 
   }
   
-  if (!isAuthenticated) {
-    console.log('PrivateRoute - Not authenticated, redirecting to /passcode');
+  if (!passcodeVerified) {
+    console.log('PrivateRoute - Passcode not verified, redirecting to /passcode');
     return <Navigate to="/passcode" />;
+  }
+  
+  if (!isAuthenticated) {
+    console.log('PrivateRoute - Passcode verified but not authenticated, redirecting to /login');
+    return <Navigate to="/login" />;
   }
   
   console.log('PrivateRoute - Authenticated, rendering children');

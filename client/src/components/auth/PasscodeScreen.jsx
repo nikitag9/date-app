@@ -30,6 +30,7 @@ const PasscodeScreen = () => {
     if (passcode === 'namish') {
       console.log('PasscodeScreen - Correct passcode, setting verified and navigating to login');
       setPasscodeVerified(true);
+      localStorage.setItem('passcodeVerified', 'true');
       navigate('/login');
     } else {
       console.log('PasscodeScreen - Incorrect passcode');

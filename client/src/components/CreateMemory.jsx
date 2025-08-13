@@ -322,7 +322,7 @@ const CreateMemory = () => {
                 }
               }}
             >
-              <ArrowBack />
+              <ArrowBack sx={{ fontSize: { xs: 20, md: 24 } }} />
             </IconButton>
             <Typography variant="h4" component="h1" sx={{ 
               fontWeight: 700, 
@@ -362,7 +362,7 @@ const CreateMemory = () => {
                   variant="outlined" 
                   required
                   InputProps={{ 
-                    startAdornment: (<InputAdornment position="start"><Add sx={{ color: '#6366F1' }} /></InputAdornment>) 
+                    startAdornment: (<InputAdornment position="start"><Add sx={{ color: '#6366F1', fontSize: { xs: 20, md: 24 } }} /></InputAdornment>) 
                   }} 
                   sx={{ 
                     '& .MuiOutlinedInput-root': { 
@@ -394,7 +394,7 @@ const CreateMemory = () => {
                   required
                   InputLabelProps={{ shrink: true }} 
                   InputProps={{ 
-                    startAdornment: (<InputAdornment position="start"><CalendarToday sx={{ color: '#6366F1' }} /></InputAdornment>) 
+                    startAdornment: (<InputAdornment position="start"><CalendarToday sx={{ color: '#6366F1', fontSize: { xs: 20, md: 24 } }} /></InputAdornment>) 
                   }} 
                   sx={{ 
                     '& .MuiOutlinedInput-root': { 
@@ -423,7 +423,7 @@ const CreateMemory = () => {
                   onChange={handleInputChange} 
                   variant="outlined" 
                   InputProps={{ 
-                    startAdornment: (<InputAdornment position="start"><LocationOn sx={{ color: '#6366F1' }} /></InputAdornment>) 
+                    startAdornment: (<InputAdornment position="start"><LocationOn sx={{ color: '#6366F1', fontSize: { xs: 20, md: 24 } }} /></InputAdornment>) 
                   }} 
                   sx={{ 
                     '& .MuiOutlinedInput-root': { 
@@ -477,13 +477,17 @@ const CreateMemory = () => {
                   component="label" 
                   fullWidth 
                   sx={{ 
-                    py: 2, 
+                    py: { xs: 2.5, md: 2 }, 
                     borderRadius: 3, 
                     borderColor: 'rgba(99,102,241,0.3)', 
                     borderWidth: 2,
                     color: '#6366F1', 
-                    fontSize: '1rem',
+                    fontSize: { xs: '0.9rem', md: '1rem' },
                     fontWeight: 600,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 1,
                     '&:hover': { 
                       borderColor: '#6366F1', 
                       background: 'rgba(99,102,241,0.1)',
@@ -491,7 +495,8 @@ const CreateMemory = () => {
                     } 
                   }}
                 >
-                  <Image sx={{ mr: 1.5, fontSize: 20 }} /> Upload Image *
+                  <Image sx={{ fontSize: { xs: 20, md: 24 } }} /> 
+                  <span>Upload Image *</span>
                   <input type="file" hidden onChange={handleImageUpload} accept="image/*" required />
                 </Button>
                 {formData.images.length > 0 && (

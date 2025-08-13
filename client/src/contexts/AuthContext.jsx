@@ -32,6 +32,12 @@ export const AuthProvider = ({ children }) => {
       setUser(JSON.parse(savedUser));
       setIsAuthenticated(true);
       setPasscodeVerified(true);
+    } else if (savedPasscodeVerified === 'true' && !savedUser) {
+      // Passcode verified but no user selected yet
+      console.log('AuthContext - Passcode verified but no user selected');
+      setPasscodeVerified(true);
+      setIsAuthenticated(false);
+      setUser(null);
     } else {
       // If no user or passcode not verified, ensure user is not authenticated
       console.log('AuthContext - No valid session, setting unauthenticated');
