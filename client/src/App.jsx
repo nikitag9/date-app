@@ -176,11 +176,27 @@ const theme = createTheme({
 
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
-  if (loading) { return <div>Loading...</div>; }
-  return isAuthenticated ? children : <Navigate to="/passcode" />;
+  
+  // Add debugging
+  console.log('PrivateRoute - isAuthenticated:', isAuthenticated, 'loading:', loading);
+  
+  if (loading) { 
+    console.log('PrivateRoute - Still loading...');
+    return <div>Loading...</div>; 
+  }
+  
+  if (!isAuthenticated) {
+    console.log('PrivateRoute - Not authenticated, redirecting to /passcode');
+    return <Navigate to="/passcode" />;
+  }
+  
+  console.log('PrivateRoute - Authenticated, rendering children');
+  return children;
 };
 
 function App() {
+  console.log('App component rendered');
+  
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -194,6 +210,8 @@ function App() {
               <Route path="/create-memory" element={<PrivateRoute><><Navbar /><CreateMemory /></></PrivateRoute>} />
               <Route path="/calendar" element={<PrivateRoute><><Navbar /><Calendar /></></PrivateRoute>} />
               <Route path="/gallery" element={<PrivateRoute><><Navbar /><Gallery /></></PrivateRoute>} />
+              {/* Catch-all route - redirect to passcode for any unmatched routes */}
+              <Route path="*" element={<Navigate to="/passcode" replace />} />
             </Routes>
           </div>
         </Router>

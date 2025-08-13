@@ -16,17 +16,23 @@ import { Favorite, Visibility, VisibilityOff, Lock } from '@mui/icons-material';
 
 const PasscodeScreen = () => {
   const navigate = useNavigate();
-  const { setPasscodeVerified } = useAuth();
+  const { setPasscodeVerified, clearAuth } = useAuth();
   const [passcode, setPasscode] = useState('');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
+  // Add debugging
+  console.log('PasscodeScreen - Component rendered');
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('PasscodeScreen - Submit called with passcode:', passcode);
     if (passcode === 'namish') {
+      console.log('PasscodeScreen - Correct passcode, setting verified and navigating to login');
       setPasscodeVerified(true);
       navigate('/login');
     } else {
+      console.log('PasscodeScreen - Incorrect passcode');
       setError('Incorrect passcode. Please try again.');
       setPasscode('');
     }
@@ -172,6 +178,26 @@ const PasscodeScreen = () => {
               }}
             >
               Access Journal
+            </Button>
+          </Box>
+
+          {/* Temporary testing button - remove this later */}
+          <Box sx={{ mt: 3, textAlign: 'center' }}>
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={clearAuth}
+              sx={{
+                borderColor: 'rgba(239,68,68,0.3)',
+                color: '#EF4444',
+                fontSize: '0.75rem',
+                '&:hover': {
+                  borderColor: '#EF4444',
+                  background: 'rgba(239,68,68,0.1)'
+                }
+              }}
+            >
+              Clear Auth (Testing)
             </Button>
           </Box>
 
