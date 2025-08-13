@@ -283,7 +283,7 @@ const Gallery = () => {
             viewMode === 'grid' ? (
               <Grid container spacing={{ xs: 2, md: 3 }}>
                 {filteredMemories.map((memory) => (
-                  <Grid item xs={12} sm={6} md={4} key={memory._id}>
+                  <Grid item xs={12} sm={6} md={4} lg={3} key={memory._id}>
                     <Card onClick={() => handleMemoryClick(memory)} sx={{
                       cursor: 'pointer',
                       borderRadius: 3,
@@ -298,13 +298,25 @@ const Gallery = () => {
                         border: '1px solid rgba(99,102,241,0.4)'
                       }
                     }}>
-                      <CardMedia component="img" height={{ xs: 180, md: 200 }} image={getImageUrl(memory)} alt={memory.title} sx={{ objectFit: 'cover' }} />
+                      <CardMedia 
+                        component="img" 
+                        height={200} 
+                        image={getImageUrl(memory)} 
+                        alt={memory.title} 
+                        sx={{ objectFit: 'cover' }} 
+                      />
                       <CardContent sx={{ p: { xs: 2, md: 2.5 } }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.5 }}>
                           <Typography variant="h6" sx={{
                             fontWeight: 600,
                             color: '#F8FAFC',
-                            fontSize: { xs: '1rem', md: '1.125rem' }
+                            fontSize: { xs: '0.875rem', md: '1rem' },
+                            lineHeight: 1.3,
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            display: '-webkit-box',
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: 'vertical'
                           }}>
                             {memory.title}
                           </Typography>
@@ -315,7 +327,9 @@ const Gallery = () => {
                               background: getCreatorColor(memory.creator),
                               color: '#fff',
                               fontWeight: 600,
-                              fontSize: '0.75rem'
+                              fontSize: '0.75rem',
+                              minWidth: 'auto',
+                              height: 20
                             }}
                           />
                         </Box>
@@ -331,9 +345,12 @@ const Gallery = () => {
                             display: 'flex',
                             alignItems: 'center',
                             fontSize: { xs: '0.75rem', md: '0.875rem' },
-                            color: '#CBD5E1'
+                            color: '#CBD5E1',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap'
                           }}>
-                            <LocationOn sx={{ fontSize: { xs: 14, md: 16 }, mr: 0.5, color: '#6366F1' }} />
+                            <LocationOn sx={{ fontSize: { xs: 14, md: 16 }, mr: 0.5, color: '#6366F1', flexShrink: 0 }} />
                             {memory.location}
                           </Typography>
                         )}
@@ -343,9 +360,10 @@ const Gallery = () => {
                 ))}
               </Grid>
             ) : (
-              <ImageList cols={{ xs: 2, sm: 3, md: 3 }} gap={{ xs: 12, md: 20 }} sx={{
+              <ImageList cols={{ xs: 2, sm: 3, md: 4, lg: 5 }} gap={16} sx={{
                 borderRadius: 3,
-                overflow: 'hidden'
+                overflow: 'hidden',
+                margin: 0
               }}>
                 {filteredMemories.map((memory) => (
                   <ImageListItem key={memory._id} onClick={() => handleMemoryClick(memory)} sx={{
@@ -375,8 +393,11 @@ const Gallery = () => {
                         <Box>
                           <Typography variant="body2" sx={{
                             color: '#fff',
-                            fontSize: { xs: '0.75rem', md: '0.875rem' },
-                            mb: 0.5
+                            fontSize: '0.75rem',
+                            mb: 0.5,
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap'
                           }}>
                             {new Date(memory.date).toLocaleDateString()}
                           </Typography>
@@ -387,7 +408,8 @@ const Gallery = () => {
                               background: getCreatorColor(memory.creator),
                               color: '#fff',
                               fontWeight: 600,
-                              fontSize: '0.75rem'
+                              fontSize: '0.75rem',
+                              height: 18
                             }}
                           />
                         </Box>

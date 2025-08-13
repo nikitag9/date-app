@@ -1,9 +1,8 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography, Button, Box, IconButton, useTheme, useMediaQuery } from '@mui/material';
-import { Favorite, Menu, Close } from '@mui/icons-material';
+import React, { useState } from 'react';
+import { AppBar, Toolbar, Typography, Button, Box, IconButton, useTheme, useMediaQuery, Drawer } from '@mui/material';
+import { Favorite, Menu, Close, Person, CalendarMonth, PhotoLibrary } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { useState } from 'react';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -23,8 +22,8 @@ const Navbar = () => {
   };
 
   const getNavButtonStyle = (path) => ({
-    color: isActive(path) ? '#FF6B6B' : '#2D3748',
-    background: isActive(path) ? 'rgba(255,107,107,0.1)' : 'transparent',
+    color: isActive(path) ? '#6366F1' : '#F8FAFC',
+    background: isActive(path) ? 'rgba(99,102,241,0.1)' : 'transparent',
     borderRadius: 2,
     px: 2,
     py: 1,
@@ -32,225 +31,225 @@ const Navbar = () => {
     fontWeight: 600,
     fontSize: '0.875rem',
     '&:hover': {
-      background: isActive(path) ? 'rgba(255,107,107,0.2)' : 'rgba(255,107,107,0.05)',
-      color: '#FF6B6B'
+      background: isActive(path) ? 'rgba(99,102,241,0.2)' : 'rgba(99,102,241,0.05)',
+      color: '#6366F1'
     }
   });
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
+  const getUserColor = (name) => {
+    const colors = ['#FF6B6B', '#4F46E5', '#10B981', '#F59E0B', '#3B82F6'];
+    const hash = name.split('').reduce((acc, char) => char.charCodeAt(0) + acc, 0);
+    return colors[hash % colors.length];
+  };
+
+  const getUserName = (name) => {
+    if (!name) return 'Guest';
+    const parts = name.split(' ');
+    if (parts.length === 1) return parts[0];
+    return `${parts[0]} ${parts[1][0]}.`;
+  };
+
+  const navItems = [
+    { path: '/', label: 'Dashboard', icon: <Favorite /> },
+    { path: '/create-memory', label: 'Create Memory', icon: <Favorite /> },
+    { path: '/calendar', label: 'Calendar', icon: <CalendarMonth /> },
+    { path: '/gallery', label: 'Gallery', icon: <PhotoLibrary /> },
+  ];
+
+  const handleMobileMenuOpen = () => {
+    setMobileMenuOpen(true);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMenuOpen(false);
   };
 
   if (!user) return null;
 
   return (
-    <>
-      <AppBar 
-        position="static" 
-        elevation={0}
-        sx={{ 
-          background: 'rgba(255,255,255,0.95)', 
-          backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(255,107,107,0.1)',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.06)'
-        }}
-      >
-        <Toolbar sx={{ px: { xs: 2, md: 3 } }}>
-          {/* Logo/Brand */}
-          <Box 
-            onClick={() => navigate('/')} 
-            sx={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              cursor: 'pointer',
-              mr: { xs: 2, md: 4 }
-            }}
-          >
+    <AppBar 
+      position="static" 
+      elevation={0}
+      sx={{
+        background: 'rgba(15,23,42,0.95)',
+        backdropFilter: 'blur(20px)',
+        borderBottom: '1px solid rgba(99,102,241,0.3)',
+        boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
+      }}
+    >
+      <Toolbar sx={{ px: { xs: 2, md: 3 } }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+          <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            mr: 3,
+            cursor: 'pointer'
+          }} onClick={() => navigate('/')}>
             <Box sx={{
-              width: { xs: 32, md: 40 },
-              height: { xs: 32, md: 40 },
+              width: { xs: 36, md: 40 },
+              height: { xs: 36, md: 40 },
               borderRadius: '50%',
-              background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%)',
+              background: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              mr: 1.5,
-              boxShadow: '0 4px 16px rgba(255,107,107,0.3)'
+              mr: 2,
+              boxShadow: '0 4px 16px rgba(99,102,241,0.4)'
             }}>
-              <Favorite sx={{ fontSize: { xs: 18, md: 22 }, color: '#fff' }} />
+              <Favorite sx={{ fontSize: { xs: 18, md: 20 }, color: '#fff' }} />
             </Box>
-            <Typography 
-              variant="h6" 
-              sx={{ 
-                fontWeight: 700, 
-                color: '#2D3748',
-                fontSize: { xs: '1rem', md: '1.25rem' },
-                display: { xs: 'none', sm: 'block' }
-              }}
-            >
+            <Typography variant="h6" sx={{
+              fontWeight: 700,
+              color: '#F8FAFC',
+              fontSize: { xs: '1.1rem', md: '1.25rem' },
+              display: { xs: 'none', sm: 'block' }
+            }}>
               Date Journal
             </Typography>
           </Box>
 
-          {/* Desktop Navigation */}
-          {!isMobile && (
-            <Box sx={{ display: 'flex', gap: 1, flex: 1 }}>
-              <Button 
-                onClick={() => navigate('/')} 
-                sx={getNavButtonStyle('/')}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
+            {navItems.map((item) => (
+              <Button
+                key={item.path}
+                onClick={() => navigate(item.path)}
+                sx={getNavButtonStyle(item.path)}
               >
-                Dashboard
+                {item.icon}
+                <Typography sx={{ ml: 1, fontSize: '0.875rem' }}>
+                  {item.label}
+                </Typography>
               </Button>
-              <Button 
-                onClick={() => navigate('/create-memory')} 
-                sx={getNavButtonStyle('/create-memory')}
-              >
-                Create Memory
-              </Button>
-              <Button 
-                onClick={() => navigate('/calendar')} 
-                sx={getNavButtonStyle('/calendar')}
-              >
-                Calendar
-              </Button>
-              <Button 
-                onClick={() => navigate('/gallery')} 
-                sx={getNavButtonStyle('/gallery')}
-              >
-                Gallery
-              </Button>
-            </Box>
-          )}
-
-          {/* User Info & Actions */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <Box sx={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              background: 'rgba(255,107,107,0.1)', 
-              borderRadius: 3, 
-              px: 2, 
-              py: 1,
-              border: '1px solid rgba(255,107,107,0.2)'
-            }}>
-              <Typography variant="body2" sx={{ 
-                fontWeight: 600, 
-                color: '#2D3748',
-                fontSize: '0.875rem'
-              }}>
-                {user.name}
-              </Typography>
-            </Box>
-            
-            {!isMobile && (
-              <Button 
-                onClick={handleLogout}
-                variant="outlined"
-                sx={{ 
-                  borderColor: 'rgba(255,107,107,0.3)',
-                  color: '#FF6B6B',
-                  borderWidth: 2,
-                  borderRadius: 3,
-                  textTransform: 'none',
-                  fontWeight: 600,
-                  fontSize: '0.875rem',
-                  px: 2,
-                  '&:hover': {
-                    borderColor: '#FF6B6B',
-                    background: 'rgba(255,107,107,0.1)',
-                    transform: 'translateY(-1px)'
-                  }
-                }}
-              >
-                Logout
-              </Button>
-            )}
-
-            {/* Mobile Menu Button */}
-            {isMobile && (
-              <IconButton
-                onClick={toggleMobileMenu}
-                sx={{ 
-                  color: '#FF6B6B',
-                  background: 'rgba(255,107,107,0.1)',
-                  '&:hover': { background: 'rgba(255,107,107,0.2)' }
-                }}
-              >
-                {mobileMenuOpen ? <Close /> : <Menu />}
-              </IconButton>
-            )}
+            ))}
           </Box>
-        </Toolbar>
+        </Box>
 
-        {/* Mobile Navigation Menu */}
-        {isMobile && mobileMenuOpen && (
-          <Box sx={{ 
-            background: 'rgba(255,255,255,0.98)', 
-            backdropFilter: 'blur(20px)',
-            borderTop: '1px solid rgba(255,107,107,0.1)',
-            py: 2,
-            px: 2
+        <Box sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2
+        }}>
+          <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            background: 'rgba(30,41,59,0.8)',
+            borderRadius: 3,
+            px: 2,
+            py: 1,
+            border: '1px solid rgba(99,102,241,0.2)'
           }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-              <Button 
-                onClick={() => { navigate('/'); setMobileMenuOpen(false); }} 
-                sx={getNavButtonStyle('/')}
-                fullWidth
-                justifyContent="flex-start"
-              >
-                Dashboard
-              </Button>
-              <Button 
-                onClick={() => { navigate('/create-memory'); setMobileMenuOpen(false); }} 
-                sx={getNavButtonStyle('/create-memory')}
-                fullWidth
-                justifyContent="flex-start"
-              >
-                Create Memory
-              </Button>
-              <Button 
-                onClick={() => { navigate('/calendar'); setMobileMenuOpen(false); }} 
-                sx={getNavButtonStyle('/calendar')}
-                fullWidth
-                justifyContent="flex-start"
-              >
-                Calendar
-              </Button>
-              <Button 
-                onClick={() => { navigate('/gallery'); setMobileMenuOpen(false); }} 
-                sx={getNavButtonStyle('/gallery')}
-                fullWidth
-                justifyContent="flex-start"
-              >
-                Gallery
-              </Button>
-              <Button 
-                onClick={() => { handleLogout(); setMobileMenuOpen(false); }}
-                variant="outlined"
-                sx={{ 
-                  borderColor: 'rgba(255,107,107,0.3)',
-                  color: '#FF6B6B',
-                  borderWidth: 2,
-                  borderRadius: 3,
-                  textTransform: 'none',
-                  fontWeight: 600,
-                  fontSize: '0.875rem',
-                  px: 2,
-                  mt: 1,
-                  '&:hover': {
-                    borderColor: '#FF6B6B',
-                    background: 'rgba(255,107,107,0.1)'
-                  }
+            <Box sx={{
+              width: 24,
+              height: 24,
+              borderRadius: '50%',
+              background: getUserColor(user?.name || 'niki'),
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              mr: 1.5
+            }}>
+              <Person sx={{ fontSize: 16, color: '#fff' }} />
+            </Box>
+            <Typography variant="body2" sx={{
+              color: '#F8FAFC',
+              fontWeight: 600,
+              fontSize: '0.875rem'
+            }}>
+              {getUserName(user?.name || 'niki')}
+            </Typography>
+          </Box>
+
+          <Button
+            variant="outlined"
+            onClick={handleLogout}
+            sx={{
+              borderRadius: 3,
+              borderColor: 'rgba(99,102,241,0.3)',
+              color: '#6366F1',
+              borderWidth: 2,
+              px: 2,
+              py: 1,
+              fontSize: '0.875rem',
+              fontWeight: 600,
+              '&:hover': {
+                borderColor: '#6366F1',
+                background: 'rgba(99,102,241,0.1)',
+                transform: 'translateY(-1px)'
+              }
+            }}
+          >
+            Logout
+          </Button>
+
+          <IconButton
+            sx={{
+              display: { md: 'none' },
+              color: '#6366F1',
+              background: 'rgba(99,102,241,0.1)',
+              '&:hover': { background: 'rgba(99,102,241,0.2)' }
+            }}
+            onClick={handleMobileMenuOpen}
+          >
+            <Menu />
+          </IconButton>
+        </Box>
+      </Toolbar>
+
+      <Drawer
+        anchor="bottom"
+        open={mobileMenuOpen}
+        onClose={handleMobileMenuClose}
+        PaperProps={{
+          sx: {
+            background: 'rgba(15,23,42,0.98)',
+            backdropFilter: 'blur(20px)',
+            borderTop: '1px solid rgba(99,102,241,0.3)',
+            borderRadius: '16px 16px 0 0'
+          }
+        }}
+      >
+        <Box sx={{ p: 3 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+            <Typography variant="h6" sx={{ color: '#F8FAFC', fontWeight: 600 }}>
+              Menu
+            </Typography>
+            <IconButton onClick={handleMobileMenuClose} sx={{ color: '#6366F1' }}>
+              <Close />
+            </IconButton>
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            {navItems.map((item) => (
+              <Button
+                key={item.path}
+                onClick={() => {
+                  navigate(item.path);
+                  handleMobileMenuClose();
                 }}
                 fullWidth
+                sx={{
+                  justifyContent: 'flex-start',
+                  py: 2,
+                  px: 3,
+                  borderRadius: 3,
+                  background: location.pathname === item.path ? 'rgba(99,102,241,0.2)' : 'transparent',
+                  color: location.pathname === item.path ? '#6366F1' : '#F8FAFC',
+                  border: location.pathname === item.path ? '1px solid rgba(99,102,241,0.4)' : '1px solid rgba(99,102,241,0.1)',
+                  '&:hover': {
+                    background: 'rgba(99,102,241,0.1)',
+                    border: '1px solid rgba(99,102,241,0.3)'
+                  }
+                }}
               >
-                Logout
+                {item.icon}
+                <Typography sx={{ ml: 2, fontSize: '1rem', fontWeight: 500 }}>
+                  {item.label}
+                </Typography>
               </Button>
-            </Box>
+            ))}
           </Box>
-        )}
-      </AppBar>
-    </>
+        </Box>
+      </Drawer>
+    </AppBar>
   );
 };
 
