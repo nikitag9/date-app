@@ -297,51 +297,45 @@ const CreateMemory = () => {
       py: { xs: 2, md: 3 },
       px: 2
     }}>
-      <Container maxWidth="md">
-        <Paper 
-          elevation={0}
-          sx={{ 
-            p: { xs: 3, md: 4 },
-            borderRadius: 4,
-            background: 'rgba(30,41,59,0.9)',
-            backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(99,102,241,0.3)',
-            boxShadow: '0 16px 48px rgba(0,0,0,0.4)'
-          }}
-        >
-          {/* Header */}
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 3, md: 4 } }}>
-            <IconButton 
-              onClick={() => navigate('/')} 
-              sx={{ 
-                mr: 2,
-                background: 'rgba(99,102,241,0.1)',
-                color: '#6366F1',
-                '&:hover': {
-                  background: 'rgba(99,102,241,0.2)'
-                }
-              }}
-            >
-              <ArrowBack sx={{ fontSize: { xs: 20, md: 24 } }} />
-            </IconButton>
-            <Typography variant="h4" component="h1" sx={{ 
-              fontWeight: 700, 
-              color: '#F8FAFC',
-              fontSize: { xs: '1.5rem', md: '2.125rem' }
-            }}>
-              Create New Memory
-            </Typography>
-            <Box sx={{ ml: 'auto' }}>
-              <Chip 
-                label={`Created by ${getUserName(selectedUser)}`}
-                sx={{
-                  background: getUserColor(selectedUser),
-                  color: '#fff',
-                  fontWeight: 600,
-                  fontSize: '0.875rem'
+      <Container maxWidth="md" sx={{ py: { xs: 2, md: 4 } }}>
+        <Paper elevation={0} sx={{
+          p: { xs: 3, md: 4 },
+          borderRadius: 4,
+          background: 'rgba(30,41,59,0.9)',
+          backdropFilter: 'blur(20px)',
+          border: '1px solid rgba(99,102,241,0.3)',
+          boxShadow: '0 16px 48px rgba(0,0,0,0.4)'
+        }}>
+          <Box sx={{ mb: { xs: 3, md: 4 } }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 2, md: 3 } }}>
+              <IconButton 
+                onClick={() => navigate('/')} 
+                sx={{ 
+                  mr: 2,
+                  background: 'rgba(99,102,241,0.1)',
+                  color: '#6366F1',
+                  '&:hover': {
+                    background: 'rgba(99,102,241,0.2)'
+                  }
                 }}
-              />
+              >
+                <ArrowBack sx={{ fontSize: { xs: 20, md: 24 } }} />
+              </IconButton>
+              <Typography variant="h4" component="h1" sx={{
+                fontWeight: 700,
+                color: '#F8FAFC',
+                fontSize: { xs: '1.5rem', md: '2rem' }
+              }}>
+                Create New Memory
+              </Typography>
             </Box>
+            <Typography variant="body1" color="text.secondary" sx={{
+              color: '#CBD5E1',
+              fontSize: { xs: '0.9rem', md: '1rem' },
+              lineHeight: 1.6
+            }}>
+              Capture your special moments with photos, notes, and details
+            </Typography>
           </Box>
 
           {error && (
@@ -378,7 +372,15 @@ const CreateMemory = () => {
                       '&.Mui-focused fieldset': { 
                         borderColor: '#6366F1' 
                       } 
-                    } 
+                    },
+                    '& .MuiInputLabel-root': {
+                      fontSize: { xs: '1rem', md: '1rem' },
+                      color: '#CBD5E1'
+                    },
+                    '& .MuiOutlinedInput-input': {
+                      fontSize: { xs: '1rem', md: '1rem' },
+                      padding: { xs: '16px 14px', md: '16px 14px' }
+                    }
                   }} 
                 />
               </Grid>
@@ -410,14 +412,22 @@ const CreateMemory = () => {
                       '&.Mui-focused fieldset': { 
                         borderColor: '#6366F1' 
                       } 
-                    } 
+                    },
+                    '& .MuiInputLabel-root': {
+                      fontSize: { xs: '1rem', md: '1rem' },
+                      color: '#CBD5E1'
+                    },
+                    '& .MuiOutlinedInput-input': {
+                      fontSize: { xs: '1rem', md: '1rem' },
+                      padding: { xs: '16px 14px', md: '16px 14px' }
+                    }
                   }} 
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField 
                   fullWidth 
-                  label="Location (Optional)" 
+                  label="Location" 
                   name="location" 
                   value={formData.location} 
                   onChange={handleInputChange} 
@@ -439,14 +449,22 @@ const CreateMemory = () => {
                       '&.Mui-focused fieldset': { 
                         borderColor: '#6366F1' 
                       } 
-                    } 
+                    },
+                    '& .MuiInputLabel-root': {
+                      fontSize: { xs: '1rem', md: '1rem' },
+                      color: '#CBD5E1'
+                    },
+                    '& .MuiOutlinedInput-input': {
+                      fontSize: { xs: '1rem', md: '1rem' },
+                      padding: { xs: '16px 14px', md: '16px 14px' }
+                    }
                   }} 
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField 
                   fullWidth 
-                  label="Notes (Optional)" 
+                  label="Notes" 
                   name="notes" 
                   multiline 
                   rows={4} 
@@ -467,7 +485,15 @@ const CreateMemory = () => {
                       '&.Mui-focused fieldset': { 
                         borderColor: '#6366F1' 
                       } 
-                    } 
+                    },
+                    '& .MuiInputLabel-root': {
+                      fontSize: { xs: '1rem', md: '1rem' },
+                      color: '#CBD5E1'
+                    },
+                    '& .MuiOutlinedInput-input': {
+                      fontSize: { xs: '1rem', md: '1rem' },
+                      padding: { xs: '16px 14px', md: '16px 14px' }
+                    }
                   }} 
                 />
               </Grid>
@@ -477,17 +503,18 @@ const CreateMemory = () => {
                   component="label" 
                   fullWidth 
                   sx={{ 
-                    py: { xs: 2.5, md: 2 }, 
+                    py: { xs: 3, md: 2.5 }, 
                     borderRadius: 3, 
                     borderColor: 'rgba(99,102,241,0.3)', 
                     borderWidth: 2,
                     color: '#6366F1', 
-                    fontSize: { xs: '0.9rem', md: '1rem' },
+                    fontSize: { xs: '1rem', md: '1rem' },
                     fontWeight: 600,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: 1,
+                    minHeight: { xs: '56px', md: '48px' },
                     '&:hover': { 
                       borderColor: '#6366F1', 
                       background: 'rgba(99,102,241,0.1)',
@@ -500,7 +527,7 @@ const CreateMemory = () => {
                   <input type="file" hidden onChange={handleImageUpload} accept="image/*" required />
                 </Button>
                 {formData.images.length > 0 && (
-                  <Box sx={{ mt: 3, display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+                  <Box sx={{ mt: 3, display: 'flex', flexWrap: 'wrap', gap: { xs: 1, md: 2 } }}>
                     {formData.images.map((image, index) => (
                       <Card key={index} sx={{ 
                         position: 'relative', 
@@ -510,12 +537,19 @@ const CreateMemory = () => {
                         transition: 'all 0.3s ease',
                         background: 'rgba(30,41,59,0.8)',
                         border: '1px solid rgba(99,102,241,0.2)',
+                        width: { xs: 'calc(50% - 4px)', sm: 'calc(33.33% - 8px)', md: '200px' },
                         '&:hover': {
                           transform: 'scale(1.02)',
                           boxShadow: '0 12px 32px rgba(0,0,0,0.4)'
                         }
                       }}>
-                        <CardMedia component="img" height="160" image={image.preview} alt={image.name} sx={{ objectFit: 'cover' }} />
+                        <CardMedia 
+                          component="img" 
+                          height={{ xs: 120, sm: 140, md: 160 }} 
+                          image={image.preview} 
+                          alt={image.name} 
+                          sx={{ objectFit: 'cover' }} 
+                        />
                         <IconButton 
                           onClick={() => removeImage(index)} 
                           sx={{ 
@@ -523,14 +557,16 @@ const CreateMemory = () => {
                             top: 8, 
                             right: 8, 
                             background: 'rgba(30,41,59,0.9)', 
-                            color: '#6366F1',
+                            color: '#EF4444',
+                            width: { xs: 32, md: 40 },
+                            height: { xs: 32, md: 40 },
                             '&:hover': { 
-                              background: '#6366F1',
+                              background: '#EF4444',
                               color: '#fff'
                             } 
                           }}
                         >
-                          <Delete />
+                          <Delete sx={{ fontSize: { xs: 16, md: 20 } }} />
                         </IconButton>
                       </Card>
                     ))}
@@ -548,14 +584,15 @@ const CreateMemory = () => {
                     background: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)',
                     borderRadius: 3, 
                     textTransform: 'none',
-                    py: 2,
-                    fontSize: '1.1rem',
+                    fontSize: { xs: '1rem', md: '1.1rem' },
                     fontWeight: 600,
-                    boxShadow: '0 8px 24px rgba(99,102,241,0.4)',
+                    py: { xs: 3, md: 2.5 },
+                    minHeight: { xs: '56px', md: '48px' },
+                    boxShadow: '0 8px 32px rgba(99,102,241,0.4)',
                     '&:hover': {
                       background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
                       transform: 'translateY(-2px)',
-                      boxShadow: '0 12px 32px rgba(99,102,241,0.5)'
+                      boxShadow: '0 12px 40px rgba(99,102,241,0.5)'
                     },
                     '&:disabled': {
                       background: '#475569',
@@ -565,7 +602,14 @@ const CreateMemory = () => {
                     }
                   }}
                 >
-                  {uploading ? <CircularProgress size={24} sx={{ color: '#fff' }} /> : 'Save Memory'}
+                  {uploading ? (
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <CircularProgress size={20} sx={{ color: '#fff' }} />
+                      <span>Creating Memory...</span>
+                    </Box>
+                  ) : (
+                    'Save Memory'
+                  )}
                 </Button>
               </Grid>
             </Grid>
