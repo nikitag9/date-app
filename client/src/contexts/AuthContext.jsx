@@ -11,14 +11,15 @@ export const useAuth = () => {
   return context;
 };
 
+// Set the base URL for all API calls
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+axios.defaults.baseURL = `${API_URL}/api`;
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passcodeVerified, setPasscodeVerified] = useState(false);
   const [loading, setLoading] = useState(true);
-
-  // Set up axios defaults
-  axios.defaults.baseURL = 'http://localhost:5001/api';
 
   useEffect(() => {
     // Check for existing user session

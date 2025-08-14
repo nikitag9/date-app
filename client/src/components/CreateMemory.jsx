@@ -89,44 +89,48 @@ const CreateMemory = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
     
-    if (!selectedUser) {
-      setError('Please select who is creating this memory');
+    if (!formData.title || !formData.date || formData.images.length === 0) {
+      setError('Please fill in all required fields');
       return;
     }
 
     setUploading(true);
+    setError('');
 
     try {
       // Upload images first
-      const uploadedImages = [];
+      const imageUrls = [];
       for (const image of formData.images) {
         const formDataImage = new FormData();
-        formDataImage.append('image', image.file);
-        
-        const response = await fetch('http://localhost:5001/api/upload/single', {
+        formDataImage.append('image', image);
+
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+        const response = await fetch(`${API_URL}/api/upload/single`, {
           method: 'POST',
-          body: formDataImage
+          body: formDataImage,
         });
-        
-        if (response.ok) {
-          const result = await response.json();
-          uploadedImages.push(result.imageUrl);
+
+        if (!response.ok) {
+          throw new Error('Failed to upload image');
         }
+
+        const result = await response.json();
+        imageUrls.push(result.filename);
       }
 
       // Create memory
       const memoryData = {
         title: formData.title,
         date: formData.date,
-        location: formData.location,
-        notes: formData.notes,
-        images: uploadedImages,
-        creator: selectedUser
+        location: formData.location || '',
+        notes: formData.notes || '',
+        images: imageUrls,
+        creator: user
       };
 
-      const response = await fetch('http://localhost:5001/api/memories', {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+      const response = await fetch(`${API_URL}/api/memories`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -20,20 +20,25 @@ const Calendar = () => {
 
   const fetchMemories = async () => {
     try {
-      setLoading(true); setError('');
-      const response = await fetch('http://localhost:5001/api/memories');
-      if (response.ok) { const data = await response.json(); setMemories(data); } else { setError('Failed to fetch memories'); }
-    } catch (error) { console.error('Error fetching memories:', error); setError('Error loading memories'); } finally { setLoading(false); }
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+      const response = await fetch(`${API_URL}/api/memories`);
+      if (response.ok) {
+        const data = await response.json();
+        setMemories(data);
+        console.log('Memories fetched successfully:', data);
+      } else {
+        console.error('Failed to fetch memories:', response.status, response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching memories:', error);
+    }
   };
 
-  const getImageUrl = (memory) => {
-    if (memory.images && memory.images.length > 0) {
-      const imagePath = memory.images[0];
-      if (imagePath.startsWith('http')) { return imagePath; }
-      if (imagePath.startsWith('/uploads/')) { return `http://localhost:5001${imagePath}`; }
-      return `http://localhost:5001/uploads/${imagePath}`;
-    }
-    return 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop';
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return '';
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+    if (imagePath.startsWith('/uploads/')) { return `${API_URL}${imagePath}`; }
+    return `${API_URL}/uploads/${imagePath}`;
   };
 
   const getDaysInMonth = (date) => {
@@ -403,7 +408,7 @@ const Calendar = () => {
                         border: '1px solid rgba(99,102,241,0.4)'
                       }
                     }}>
-                      <CardMedia component="img" height={{ xs: 140, md: 160 }} image={getImageUrl(memory)} alt={memory.title} sx={{ objectFit: 'cover' }} />
+                      <CardMedia component="img" height={{ xs: 140, md: 160 }} image={getImageUrl(memory.images?.[0])} alt={memory.title} sx={{ objectFit: 'cover' }} />
                       <CardContent sx={{ p: { xs: 2, md: 2.5 } }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.5 }}>
                           <Typography variant="h6" sx={{
@@ -491,7 +496,7 @@ const Calendar = () => {
             <DialogContent sx={{ p: { xs: 3, md: 4 } }}>
               <Grid container spacing={{ xs: 2, md: 3 }}>
                 <Grid item xs={12} md={6}>
-                  <CardMedia component="img" height={{ xs: 250, md: 300 }} image={getImageUrl(selectedMemory)} alt={selectedMemory.title} sx={{ objectFit: 'cover', borderRadius: 3 }} />
+                  <CardMedia component="img" height={{ xs: 250, md: 300 }} image={getImageUrl(selectedMemory.images?.[0])} alt={selectedMemory.title} sx={{ objectFit: 'cover', borderRadius: 3 }} />
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>

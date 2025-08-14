@@ -58,7 +58,8 @@ const Gallery = () => {
   const fetchMemories = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5001/api/memories');
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+      const response = await fetch(`${API_URL}/api/memories`);
       if (response.ok) {
         const data = await response.json();
         setMemories(data);
@@ -75,19 +76,11 @@ const Gallery = () => {
     }
   };
 
-  const getImageUrl = (memory) => {
-    if (memory.images && memory.images.length > 0) {
-      const imagePath = memory.images[0];
-      if (imagePath.startsWith('http')) {
-        return imagePath;
-      }
-      // Fix the image path construction
-      if (imagePath.startsWith('/uploads/')) {
-        return `http://localhost:5001${imagePath}`;
-      }
-      return `http://localhost:5001/uploads/${imagePath}`;
-    }
-    return 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop';
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return '';
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+    if (imagePath.startsWith('/uploads/')) { return `${API_URL}${imagePath}`; }
+    return `${API_URL}/uploads/${imagePath}`;
   };
 
   const getCreatorColor = (creator) => {
@@ -126,7 +119,8 @@ const Gallery = () => {
           : `${user?.name || 'User'}: ${newNote}`
       };
 
-      const response = await fetch(`http://localhost:5001/api/memories/${selectedMemory._id}`, {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+      const response = await fetch(`${API_URL}/api/memories/${selectedMemory._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -285,7 +279,7 @@ const Gallery = () => {
                       <CardMedia 
                         component="img" 
                         height={200} 
-                        image={getImageUrl(memory)} 
+                        image={getImageUrl(memory.images?.[0])} 
                         alt={memory.title} 
                         sx={{ objectFit: 'cover' }} 
                       />
@@ -361,7 +355,7 @@ const Gallery = () => {
                     }
                   }}>
                     <img
-                      src={getImageUrl(memory)}
+                      src={getImageUrl(memory.images?.[0])}
                       alt={memory.title}
                       loading="lazy"
                       style={{
@@ -479,7 +473,7 @@ const Gallery = () => {
             <DialogContent sx={{ p: { xs: 3, md: 4 } }}>
               <Grid container spacing={{ xs: 2, md: 3 }}>
                 <Grid item xs={12} md={6}>
-                  <CardMedia component="img" height={{ xs: 280, md: 320 }} image={getImageUrl(selectedMemory)} alt={selectedMemory.title} sx={{ objectFit: 'cover', borderRadius: 3 }} />
+                  <CardMedia component="img" height={{ xs: 280, md: 320 }} image={getImageUrl(selectedMemory.images?.[0])} alt={selectedMemory.title} sx={{ objectFit: 'cover', borderRadius: 3 }} />
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>

@@ -66,3 +66,5 @@ Thumbs.db
 
 # Uploads directory
 server/uploads/ 
+# Local Netlify folder
+.netlify
